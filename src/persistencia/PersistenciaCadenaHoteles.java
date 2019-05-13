@@ -20,8 +20,14 @@ import negocio.Convencion;
 import negocio.Gasto;
 import negocio.Habitacion;
 import negocio.PlanesDeConsumo;
+import negocio.RFC1;
+import negocio.RFC2;
+import negocio.RFC3;
+import negocio.RFC6;
+import negocio.RFC7;
 import negocio.ReservaHabitacion;
 import negocio.ReservaServicio;
+import negocio.Servicio;
 
 /**
  * Clase de persistencia de la cadena de hoteles.
@@ -90,6 +96,8 @@ public class PersistenciaCadenaHoteles {
 	private SQLTipo_Reserva__Habitacion sqlTipo_Reserva_Habitacion;
 
 	private SQLTipo_Rol sqlTipo_Rol;
+	
+	private SQLConsultas sqlConsultas;
 
 	private PersistenciaCadenaHoteles(){
 		pmf = JDOHelper.getPersistenceManagerFactory("CadenaHoteles");
@@ -216,6 +224,7 @@ public class PersistenciaCadenaHoteles {
 		sqlTipo_Plan_De_Consumo = new SQLTipo_Plan_De_Consumo(this);
 		sqlTipo_Reserva_Habitacion = new SQLTipo_Reserva__Habitacion(this);
 		sqlTipo_Rol = new SQLTipo_Rol(this);
+		sqlConsultas = new SQLConsultas(this);
 
 	}
 
@@ -716,4 +725,37 @@ public class PersistenciaCadenaHoteles {
         }
 	}
 
+	public List<RFC1> rfc1(String fechaInicio, String fechaFin) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		return sqlConsultas.rfc1(pm, fechaInicio, fechaFin);
+	}
+
+	public List<RFC2> rfc2() {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		return sqlConsultas.rfc2(pm);
+	}
+	
+	public List<RFC3> rfc3(String fechaInicio, String fechaFin) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		return sqlConsultas.rfc3(pm, fechaInicio, fechaFin);
+	}
+	
+	public List<Servicio> rfc4(long idServicio, long idHotel, String nombre, int horaA, int horaC, String tipo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		return sqlConsultas.rfc4(pm, idServicio, idHotel, nombre, horaA, horaC, tipo);
+	}
+	
+	public List<RFC6> rfc6()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		return sqlConsultas.rfc6(pm);
+	}
+	
+	public List<RFC7> rfc7()
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		return sqlConsultas.rfc7(pm);
+	}
+	
 }

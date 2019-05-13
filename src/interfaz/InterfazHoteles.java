@@ -37,7 +37,14 @@ import negocio.CadenaHoteles;
 import negocio.Convencion;
 import negocio.Gasto;
 import negocio.Hotel;
+import negocio.RFC1;
+import negocio.RFC2;
+import negocio.RFC3;
+import negocio.RFC4;
+import negocio.RFC6;
+import negocio.RFC7;
 import negocio.ReservaHabitacion.TIPOS_DE_RESERVA;
+import negocio.Servicio;
 import negocio.VOCliente;
 import negocio.VOReservaHabitacion;
 import negocio.VOReservaServicio;
@@ -504,10 +511,147 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		}
 	}
 
-
-
-
-
+	/**
+	 * Metodos de requerimientos de consulta
+	 */
+	
+	public void rfc1()
+	{
+		try
+		{
+			String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA Ej: 18/03/2019", "Consultar ganancia habitaciones", JOptionPane.QUESTION_MESSAGE);
+			String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA Ej: 19/03/2019", "Consultar ganancia habitaciones", JOptionPane.QUESTION_MESSAGE);
+			List<RFC1> lista = hoteles.rfc1(idFinic, idFfin);
+			
+			String resultado = "Requerimiento funcional de consulta 1: \n";
+			int i = 1;
+			for(RFC1 r : lista)
+			{
+				resultado += i++ + ". " + r.toString() + "\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		}
+		catch (Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void rfc2()
+	{
+		try
+		{
+			List<RFC2> lista = hoteles.rfc2();
+			
+			String resultado = "Requerimiento funcional de consulta 2: \n";
+			int i = 1;
+			for(RFC2 r : lista)
+			{
+				resultado += i++ + ". " + r.toString() + "\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		}
+		catch (Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void rfc3()
+	{
+		try
+		{
+			String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA Ej: 17/03/2019", "Indice ocupacion habitaciones", JOptionPane.QUESTION_MESSAGE);
+			String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA Ej: 17/03/2019", "Indice ocupacion habitaciones", JOptionPane.QUESTION_MESSAGE);
+			List<RFC3> lista = hoteles.rfc3(idFinic, idFfin);
+			
+			String resultado = "Requerimiento funcional de consulta 3: \n";
+			int i = 1;
+			for(RFC3 r : lista)
+			{
+				resultado += i++ + ". " + r.toString() + "\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		}
+		catch (Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void rfc4()
+	{
+		try
+		{
+			long idServicio = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del servicio Ej: 5", "Servicios con caracteristica", JOptionPane.QUESTION_MESSAGE));
+			long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "Servicios con caracteristica", JOptionPane.QUESTION_MESSAGE));
+			String nombre = JOptionPane.showInputDialog (this, "Ingrese el nombre del servicio Ej: Restaurante", "Servicios con caracteristica", JOptionPane.QUESTION_MESSAGE);
+			int horaA = Integer.parseInt(JOptionPane.showInputDialog (this, "Ingrese hora de apertura Ej: 8", "Servicios con caracteristica", JOptionPane.QUESTION_MESSAGE));
+			int horaC = Integer.parseInt(JOptionPane.showInputDialog (this, "Ingrese hora de cierre Ej: 21", "Servicios con caracteristica", JOptionPane.QUESTION_MESSAGE));
+			String tipo = JOptionPane.showInputDialog (this, "Ingrese tipo Ej: Alimentacion", "Servicios con caracteristica", JOptionPane.QUESTION_MESSAGE);
+			
+			List<Servicio> lista = hoteles.rfc4(idServicio, idHotel, nombre, horaA, horaC, tipo);
+			
+			String resultado = "Requerimiento funcional de consulta 4: \n";
+			int i = 1;
+			for(Servicio r : lista)
+			{
+				resultado += i++ + ". " + r.toString() + "\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		}
+		catch (Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void rfc6()
+	{
+		try
+		{
+			List<RFC6> lista = hoteles.rfc6();
+			
+			String resultado = "Requerimiento funcional de consulta 6: \n";
+			int i = 1;
+			for(RFC6 r : lista)
+			{
+				resultado += i++ + ". " + r.toString() + "\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		}
+		catch (Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void rfc7()
+	{
+		try
+		{
+			List<RFC7> lista = hoteles.rfc7();
+			
+			String resultado = "Requerimiento funcional de consulta 7: \n";
+			int i = 1;
+			for(RFC7 r : lista)
+			{
+				resultado += i++ + ". " + r.toString() + "\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		}
+		catch (Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
 	/* ****************************************************************
 	 * 			Mï¿½todos administrativos
 	 *****************************************************************/

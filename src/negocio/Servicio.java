@@ -18,29 +18,25 @@ public class Servicio implements VOServicio{
 
 	private String nombre;
 	
-	private String hora_apertura;
+	private int hora_apertura;
 	
-	private String hora_cierre;
+	private int hora_cierre;
 	
 	private String tipo;
 	
 	private String descripcion;
-	
-	
-	private List<Long> productos;
-	
+		
 	public Servicio() {
 		this.id = 0;
 		this.nombre = null;
-		this.hora_apertura = null;
-		this.hora_cierre = null;
+		this.hora_apertura = 0;
+		this.hora_cierre = 0;
 		this.tipo = null;
 		this.descripcion = null;
 		id_hotel=0;
-		productos=null;
 	}
 	
-	public Servicio(Long id, String nombre, String horaApertura, String horaCierre, String tipo, String descripcion, long hotel, List productos) {
+	public Servicio(Long id, String nombre, int horaApertura, int horaCierre, String tipo, String descripcion, long hotel) {
 		this.id = id;
 		this.nombre = nombre;
 		this.hora_apertura = horaApertura;
@@ -48,7 +44,6 @@ public class Servicio implements VOServicio{
 		this.tipo = tipo;
 		this.descripcion = descripcion;
 		this.id_hotel=hotel;
-		this.productos=productos;
 	}
 
 
@@ -58,14 +53,6 @@ public class Servicio implements VOServicio{
 
 	public void setHotel(long hotel) {
 		this.id_hotel = hotel;
-	}
-
-	public List<Long> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(List<Long> productos) {
-		this.productos = productos;
 	}
 
 	/**
@@ -103,7 +90,7 @@ public class Servicio implements VOServicio{
 	/**
 	 * @return the horaApertura
 	 */
-	public String getHoraApertura() {
+	public int getHoraApertura() {
 		return hora_apertura;
 	}
 
@@ -111,7 +98,7 @@ public class Servicio implements VOServicio{
 	/**
 	 * @param horaApertura the horaApertura to set
 	 */
-	public void setHoraApertura(String horaApertura) {
+	public void setHoraApertura(int horaApertura) {
 		this.hora_apertura = horaApertura;
 	}
 
@@ -119,7 +106,7 @@ public class Servicio implements VOServicio{
 	/**
 	 * @return the horaCierre
 	 */
-	public String getHoraCierre() {
+	public int getHoraCierre() {
 		return hora_cierre;
 	}
 
@@ -127,7 +114,7 @@ public class Servicio implements VOServicio{
 	/**
 	 * @param horaCierre the horaCierre to set
 	 */
-	public void setHoraCierre(String horaCierre) {
+	public void setHoraCierre(int horaCierre) {
 		this.hora_cierre = horaCierre;
 	}
 

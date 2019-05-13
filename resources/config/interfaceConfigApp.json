@@ -54,24 +54,52 @@
 		  "options":
 			[
 				{
-					"label": "GANANCIA HABITACION RFC1",
-					"event": "adicionarTipoBebida"
+					"label": "RFC1 - GANANCIA HABITACION",
+					"event": "rfc1"
 				},
 				{
-					"label": "20 SERV. MAS POPULARES RFC2",
-					"event": "listarTipoBebida"
+					"label": "RFC2 - 20 SERV. MAS POPULARES",
+					"event": "rfc2"
 				},
 				{
-					"label": "INDICE OCUPACION HABITACIONES RFC3",
-					"event": "eliminarTipoBebidaPorId"
+					"label": "RFC3 - INDICE OCUPACION HABITACIONES",
+					"event": "rfc3"
 				},
 				{
-					"label": "SERVICIOS CON CARACTERISTICA RFC4",
-					"event": "buscarTipoBebidaPorNombre"
+					"label": "RFC4 - SERVICIOS CON CARACTERISTICA",
+					"event": "rfc4"
 				},
 				{
-					"label": "CONSUMO POR USUARIO RFC5",
-					"event": "buscarTipoBebidaPorNombre"
+					"label": "RFC5X - CONSUMO POR USUARIO",
+					"event": "rfc5"
+				},
+				{
+					"label": "RFC6 - ANALIZAR OPERACION",
+					"event": "rfc6"
+				},
+				{
+					"label": "RFC7 - ENCONTRAR BUENOS CLIENTES",
+					"event": "rfc7"
+				},
+				{
+					"label": "RFC8X - ENCONTRAR SERVICIOS POCA DEMANDA",
+					"event": "rfc8"
+				},
+				{
+					"label": "RFC9 - CONSULTAR CONSUMO EN HOTELANDES",
+					"event": "rfc9"
+				},
+				{
+					"label": "RFC10 - CONSULTAR CONSUMO EN HOTELANDESV2",
+					"event": "rfc10"
+				},
+				{
+					"label": "RFC11 - CONSULTAR FUNCIONAMIENTO",
+					"event": "rfc11"
+				},
+				{
+					"label": "RFC12 - CONSULTAR LOS BUENOS CLIENTES",
+					"event": "rfc12"
 				}
 			]
 		},
@@ -79,7 +107,7 @@
 		  "options":
 			[
 				{
-					"label": "Mostrar log Parranderos",
+					"label": "Mostrar log HotelAndes",
 					"event": "mostrarLogParranderos"
 				},
 				{

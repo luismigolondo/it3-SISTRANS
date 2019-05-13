@@ -3,7 +3,9 @@
  */
 package persistencia;
 
+import java.sql.ResultSet;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -72,12 +74,11 @@ public class SQLConsultas {
 		return (List<RFC3>) q.executeList();
 	}
 	
-	public List<Servicio> rfc4(PersistenceManager pm, long idHotel, String nombre, int horaA, int horaC, int tipo)
+	public List<Servicio> rfc4(PersistenceManager pm, long idServicio, long idHotel, String nombre, int horaA, int horaC, String tipo)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM SERVICIOS s "
-				+ "WHERE s.ID= ? AND s.ID_HOTEL= ? AND s.NOMBRE= ? AND s.HORA_APERTURA<= ? AND s.HORA_CIERRE >= ? AND s.TIPO= ?");
+				+ "WHERE s.ID= " + idServicio + " AND s.ID_HOTEL= " + idHotel + " AND s.NOMBRE= '" + nombre + "' AND s.HORA_APERTURA<= '" + horaA + "' AND s.HORA_CIERRE >= '" + horaC + "' AND s.TIPO= '" + tipo + "' ");
 		q.setResultClass(Servicio.class);
-		q.setParameters(idHotel, nombre, horaA, horaC, tipo);
 		return (List<Servicio>) q.executeList();
 	}
 	

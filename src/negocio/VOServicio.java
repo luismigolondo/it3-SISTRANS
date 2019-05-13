@@ -9,44 +9,42 @@ import java.util.List;
  *
  */
 public interface VOServicio {
-	
+
 	/**
 	 * 
 	 * @return el id del servicio
 	 */
 	public long getId();
-	
+
 	/**
 	 * 
 	 * @return el nombre del servicio
 	 */
 	public String getNombre();
-	
+
 	/**
 	 * 
 	 * @return la hora de apertura
 	 */
-	public String getHoraApertura();
-	
+	public int getHoraApertura();
+
 	/**
 	 * 
 	 * @return la hora de cierre
 	 */
-	public String getHoraCierre();
-	
+	public int getHoraCierre();
+
 	/**
 	 * 
 	 * @return el tipo de servicio
 	 */
 	public String getTipo();
-	
+
 	/**
 	 * 
 	 * @return la descripcion del servicio
 	 */
 	public String getDescripcion();
-	
+
 	public long getHotel();
-	
-	public List<Long> getProductos();
 }
