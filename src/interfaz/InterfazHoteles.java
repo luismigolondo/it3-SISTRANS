@@ -50,7 +50,8 @@ import negocio.VOReservaServicio;
 @SuppressWarnings("serial")
 public class InterfazHoteles extends JFrame implements ActionListener{
 	
-
+	//first commit juancris
+	
 	//---------------------------------------------------
 	// CONSTANTES
 	//---------------------------------------------------
