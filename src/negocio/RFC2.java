@@ -9,10 +9,10 @@ package negocio;
  */
 public class RFC2 {
 
-private long id_producto;
-	
+	private long id_producto;
+
 	private int count;
-	
+
 	public RFC2()
 	{
 		this.id_producto = 0;
@@ -46,10 +46,10 @@ private long id_producto;
 	public void setCount(int suma) {
 		this.count = suma;
 	}
-	
+
 	public String toString()
 	{
 		return "ID_Producto = " + id_producto + "; Count = " + count;
 	}
-	
+
 }

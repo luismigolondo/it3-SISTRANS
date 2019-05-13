@@ -8,11 +8,11 @@ package negocio;
  *
  */
 public class RFC1 {
-	
+
 	private long id_habitacion;
-	
+
 	private int suma;
-	
+
 	public RFC1()
 	{
 		this.id_habitacion = 0;
@@ -46,7 +46,7 @@ public class RFC1 {
 	public void setSuma(int suma) {
 		this.suma = suma;
 	}
-	
+
 	public String toString()
 	{
 		return "ID_Habitacion = " + id_habitacion + "; Suma = " + suma;

@@ -14,7 +14,7 @@ public interface VOServicio {
 	 * 
 	 * @return el id del servicio
 	 */
-	public Long getId();
+	public long getId();
 	
 	/**
 	 * 
@@ -46,7 +46,7 @@ public interface VOServicio {
 	 */
 	public String getDescripcion();
 	
-	public Hotel getHotel();
+	public long getHotel();
 	
 	public List<Long> getProductos();
 }
