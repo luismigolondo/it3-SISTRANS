@@ -399,8 +399,9 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			String concat = "1:"+habSuite;
 			concat+=";2:"+habSuite_P;
 			concat+=";3:"+habSencilla;
-			
+			System.out.println("ESTO SE IMPRIME HABITACIONES:"+concat);
 			String servicios = JOptionPane.showInputDialog (this, "Ingrese los servicios requeridos separados por una coma", "Ingresar servicios", JOptionPane.QUESTION_MESSAGE); 
+			System.out.println("ESTO IMPRIME SERVICIOS: "+servicios);
 			String b = hoteles.reservarHabServs(id,idConvencion,idHotel,concat,servicios);
 			if(b.equals(""))
 			{

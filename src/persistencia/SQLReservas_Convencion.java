@@ -36,6 +36,7 @@ public class SQLReservas_Convencion {
 		//EL ID DE CADA RESERVA ES A PARTIR DEL ID QUE PROVEE EL USUARIO (llega por parametro a este metodo)
 		//ES DECIR, LA PRIMERA RESERVA VA A TENER EL ID DADO PRO EL USUARIO, LUEGO SE SUMA DE A 1
 		String[] habitacionesCant = habs.split(";");
+		System.out.println(habitacionesCant.length+"HABITACIONES CANT");
 		
 		//tipoHabitacion:cantidad;tipoHabitacion:cantidad
 		long contador = id;
@@ -45,22 +46,32 @@ public class SQLReservas_Convencion {
 				Query x = pm.newQuery(SQL, "SELECT h.ID FROM "+"HABITACIONES"+" h "
 						+ "LEFT JOIN "+"RESERVAS_HABITACIONES"+" hr ON hr.ID=h.ID"
 						+ " WHERE hr.ID IS NULL AND h.TIPO_HABITACION="+tipoHabAct[0]);
+				x.setResultClass();
 				
-				Object o = x.executeUnique();
-				Object[] oA = (Object[])o;
-				for(int i=0;i<oA.length;i++) {
-					Object[] datosAct = (Object[])oA[i];
-					if(oA!=null)
-					{
-						long idHab = (long)datosAct[0];
-						Query xy = pm.newQuery(SQL,"INSERT INTO "+"RESERVAS_CONVENCIONES"+" (ID,ID_CONVENCION,ID_HABITACION,ID_SERVICIO)"
-								+ "VALUES (?,?,?,?)");
-						long idd = id+i;
-						xy.setParameters(idd,idConvencion,idHab,null);
-						respuesta+=idd;
-						contador++;
-					}					
+				try{
+					ResultSet o = (ResultSet)x.execute();
+					while(o.next()){
+						System.out.println("IMPRIMIENDO LO QUE REOTRNA EL SELECT: "+o.getString(1));
+					}
+					
 				}
+				catch(Exception q){
+					
+				}
+				
+//				for(int i=0;i<oA.length;i++) {
+//					Object[] datosAct = (Object[])oA[i];
+//					if(oA!=null)
+//					{
+//						long idHab = (long)datosAct[0];
+//						Query xy = pm.newQuery(SQL,"INSERT INTO "+"RESERVAS_CONVENCIONES"+" (ID,ID_CONVENCION,ID_HABITACION,ID_SERVICIO)"
+//								+ "VALUES (?,?,?,?)");
+//						long idd = id+i;
+//						xy.setParameters(idd,idConvencion,idHab,null);
+//						respuesta+=idd;
+//						contador++;
+//					}					
+//				}
 			}
 		}
 		//USO VARIABLE CONTADOR PORQUE EL PRIMER ID LO USA LA PRIMERA HABITACION, LA SIGUIENTE HABITACION USA ID+1
