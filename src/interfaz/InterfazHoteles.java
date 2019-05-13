@@ -378,7 +378,6 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	public void RF12reservarHabServs(){
 		try 
 		{
-			long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva a crear", "", JOptionPane.QUESTION_MESSAGE));
 			long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
 			long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
 
@@ -402,7 +401,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			System.out.println("ESTO SE IMPRIME HABITACIONES:"+concat);
 			String servicios = JOptionPane.showInputDialog (this, "Ingrese los servicios requeridos separados por una coma", "Ingresar servicios", JOptionPane.QUESTION_MESSAGE); 
 			System.out.println("ESTO IMPRIME SERVICIOS: "+servicios);
-			String b = hoteles.reservarHabServs(id,idConvencion,idHotel,concat,servicios);
+			String b = hoteles.reservarHabServs(idConvencion,idHotel,concat,servicios);
 			if(b.equals(""))
 			{
 				throw new Exception("No se puede realizar las reservas para la convencion");

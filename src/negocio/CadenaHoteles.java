@@ -107,10 +107,10 @@ public class CadenaHoteles {
 	}
 
 	//RF12
-	public String reservarHabServs(long id,long idConvencion, long idHotel, String habs, String servs)
+	public String reservarHabServs(long idConvencion, long idHotel, String habs, String servs)
 	{
 		log.info("Realizando la reserva de habitaciones y servicios: " );
-		String checkout = persistencia.RF12reservarHabServs(id,idConvencion, idHotel, habs, servs);
+		String checkout = persistencia.RF12reservarHabServs(idConvencion, idHotel, habs, servs);
 		log.info("Se realiz� la reserva de habitaciones y servicios");
 		return checkout;
 	}

@@ -528,13 +528,14 @@ public class PersistenciaCadenaHoteles {
 	
 	}
 	
-	public String RF12reservarHabServs(long id,long idConvencion, long idHotel, String habs, String servs)
+	public String RF12reservarHabServs(long idConvencion, long idHotel, String habs, String servs)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			String resp = sqlReservas_Convencion.registrarHabsServs(pm,id,idConvencion, idHotel, habs,servs);
+			long idx = nextval();
+			String resp = sqlReservas_Convencion.registrarHabsServs(pm,idx,idConvencion, idHotel, habs,servs);
 			tx.commit();
 			return resp;
 		}
