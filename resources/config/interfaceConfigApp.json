@@ -1,0 +1,144 @@
+{
+	"title": "Aplicacion transaccional de HotelAndes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./resources/config/hotelImg.png",
+	"menuBar":
+	[
+		{ "menuTitle": "Req.Func. Modificacion",
+		  "options":
+			[
+				{
+					"label": "REG. RESERVA DE ALOJAMIENTO RF7",
+					"event": "RF7registrarReservaHabitacion"
+				},
+				{
+					"label": "REG.RESERVA SERVICIO CLIENTE RF8",
+					"event": "RF8registrarReservaServicio"
+				},
+				{
+					"label": "REG. LLEGADA CLIENTE RF9",
+					"event": "RF9registrarLlegadaCliente"
+				},
+				{
+					"label": "REG. CONSUMO CLIENTE RF10",
+					"event": "RF10registrarConsumoServicio"
+				},
+				{
+					"label": "REG. SALIDA CLIENTE RF11",
+					"event": "RF11registrarSalidaCliente"
+				},
+				{
+					"label": "REG. RESERVA HABs Y SERVs RF12",
+					"event": "RF12reservarHabServs"
+				},
+				{
+					"label": "CANCELAR RESERVAS CONVENCION RF13",
+					"event": "RF13cancelarReservasConvencion"
+				},
+				{
+					"label": "REG. FIN CONVENCION RF14",
+					"event": "RF14registrarFinConvencion"
+				},
+				{
+					"label": "REG. MANTENIMIENTO HABs O SERVs RF15",
+					"event": "RF15registrarEntradaMantenimiento"
+				},
+				{
+					"label": "REG. FIN MANTENIMIENTO HABs Y SERVs RF16",
+					"event": "RF16registrarFinMantenimiento"
+				}
+			]
+		},
+		{ "menuTitle": "Req.Func. Consulta",
+		  "options":
+			[
+				{
+					"label": "GANANCIA HABITACION RFC1",
+					"event": "adicionarTipoBebida"
+				},
+				{
+					"label": "20 SERV. MAS POPULARES RFC2",
+					"event": "listarTipoBebida"
+				},
+				{
+					"label": "INDICE OCUPACION HABITACIONES RFC3",
+					"event": "eliminarTipoBebidaPorId"
+				},
+				{
+					"label": "SERVICIOS CON CARACTERISTICA RFC4",
+					"event": "buscarTipoBebidaPorNombre"
+				},
+				{
+					"label": "CONSUMO POR USUARIO RFC5",
+					"event": "buscarTipoBebidaPorNombre"
+				}
+			]
+		},
+		{ "menuTitle": "Mantenimiento",
+		  "options":
+			[
+				{
+					"label": "Mostrar log Parranderos",
+					"event": "mostrarLogParranderos"
+				},
+				{
+					"label": "Mostrar log datanucleus",
+					"event": "mostrarLogDatanuecleus"
+				},
+				{
+					"label": "Limpiar log de HotelAndes",
+					"event": "limpiarLogParranderos"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},		
+		{ "menuTitle": "Documentacion",
+		  "options":
+			[
+				{
+					"label": "Presentacion general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creacion de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc HotelAndes",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Acerca de ...",
+		  "options":
+			[
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}		
+		
+	]
+}
+	
