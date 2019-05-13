@@ -2,16 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_144]"/>
-	<classpathentry kind="lib" path="/Users/luisgomez/Documents/Clases Universidad/Semestre 4/SISTRANS/c-07/lib/datanucleus-api-jdo-5.1.7.jar"/>
-	<classpathentry kind="lib" path="/Users/luisgomez/Documents/Clases Universidad/Semestre 4/SISTRANS/c-07/lib/datanucleus-core-5.1.10.jar"/>
-	<classpathentry kind="lib" path="/Users/luisgomez/Documents/Clases Universidad/Semestre 4/SISTRANS/c-07/lib/datanucleus-rdbms-5.1.10.jar"/>
-	<classpathentry kind="lib" path="/Users/luisgomez/Documents/Clases Universidad/Semestre 4/SISTRANS/c-07/lib/gson-2.8.5.jar"/>
-	<classpathentry kind="lib" path="/Users/luisgomez/Documents/Clases Universidad/Semestre 4/SISTRANS/c-07/lib/hamcrest-core-1.3.jar"/>
-	<classpathentry kind="lib" path="/Users/luisgomez/Documents/Clases Universidad/Semestre 4/SISTRANS/c-07/lib/javax.jdo-3.2.0-m8.jar"/>
-	<classpathentry kind="lib" path="/Users/luisgomez/Documents/Clases Universidad/Semestre 4/SISTRANS/c-07/lib/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="/Users/luisgomez/Documents/Clases Universidad/Semestre 4/SISTRANS/c-07/lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="/Users/luisgomez/Documents/Clases Universidad/Semestre 4/SISTRANS/c-07/lib/ojdbc8.jar"/>
-	<classpathentry kind="lib" path="/Users/luisgomez/Documents/Clases Universidad/Semestre 4/SISTRANS/c-07/lib/transaction-api-1.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/datanucleus-api-jdo-5.1.7.jar"/>
+	<classpathentry kind="lib" path="lib/datanucleus-core-5.1.10.jar"/>
+	<classpathentry kind="lib" path="lib/datanucleus-rdbms-5.1.10.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/javax.jdo-3.2.0-m8.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="lib/ojdbc8.jar"/>
+	<classpathentry kind="lib" path="lib/transaction-api-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
