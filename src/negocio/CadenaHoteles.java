@@ -116,10 +116,10 @@ public class CadenaHoteles {
 	}
 
 	//RF13
-	public String cancelarReservasConvencion(long idConvencion, long idHotel, String habs, String servs)
+	public String cancelarReservasConvencion(long idConvencion, String habs, String servs)
 	{
 		log.info("Realizando cancelacion de las reserva de habitaciones y servicios: " );
-		String checkout = persistencia.RF13cancelarReservasConvencion(idConvencion,idHotel,habs,servs);
+		String checkout = persistencia.RF13cancelarReservasConvencion(idConvencion,habs,servs);
 		log.info("Se realiz� la cancelacioj de las reservas de habitaciones y servicios");
 		return checkout;
 	}

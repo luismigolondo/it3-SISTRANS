@@ -551,13 +551,13 @@ public class PersistenciaCadenaHoteles {
 		}
 	}
 	
-	public String RF13cancelarReservasConvencion(long idHotel, long idConvencion, String habs, String servs)
+	public String RF13cancelarReservasConvencion(long idConvencion, String habs, String servs)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			String resp = sqlReservas_Convencion.eliminarReservas(pm,idConvencion, idHotel, habs,servs);
+			String resp = sqlReservas_Convencion.eliminarReservas(pm,idConvencion, habs,servs);
 			tx.commit();
 			return resp;
 		}

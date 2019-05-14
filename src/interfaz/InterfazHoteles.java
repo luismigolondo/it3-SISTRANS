@@ -425,13 +425,11 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		try 
 		{
 			long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
-			long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
-
 			
 			String habs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de las habitaciones a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
 			String servs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de los servicios a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
 			
-			String b = hoteles.cancelarReservasConvencion(idConvencion, idHotel,habs,servs);
+			String b = hoteles.cancelarReservasConvencion(idConvencion,habs,servs);
 			
 			String resultado = "En cancelarReservaHabitacionesYServicios\n\n";
 			resultado += "DESRESEVACION realizada exitosamente";
