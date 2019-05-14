@@ -34,16 +34,20 @@ public class SQLConvenciones {
 	
 	public long adicionarConvencion(PersistenceManager pm,long id,String fIni, String fFin, long idH)
 	{
-		Query q = pm.newQuery(SQL, "INSERT INTO " + "CONVENCIONES" + "(ID, ID_HOTEL,FECHA_INICIO,FECHA_FIN) values (?,?,?,?)");
-        q.setParameters(id, idH, fIni,fFin);
+		Query q = pm.newQuery(SQL, "INSERT INTO " + "CONVENCIONES" + "(ID, ID_HOTEL,FECHA_INICIO,FECHA_FIN,PAZ_Y_SALVO) values (?,?,?,?,?)");
+        q.setParameters(id, idH, fIni,fFin,0);
         return (long) q.executeUnique();   
 	}
 	
-	public long eliminarConvencion(PersistenceManager pm,long id)
+	public String eliminarConvencion(PersistenceManager pm,long id)
 	{
-		Query q = pm.newQuery(SQL, "DELETE FROM " + "CONVENCIONES" + " WHERE id = ?");
-        q.setParameters(id);
-        return (long) q.executeUnique();    
+		String respuesta = "";
+		
+		
+//		Query q = pm.newQuery(SQL, "UPDATE CONVENCIONES SET PAZ_Y_SALVO = 1 WHERE id = ?");
+//        q.setParameters(id);
+//        q.executeUnique();
+        return "";    
 	}
 	
 	public Convencion darConvencion(PersistenceManager pm, long id)

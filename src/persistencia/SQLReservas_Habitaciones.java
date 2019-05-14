@@ -36,8 +36,8 @@ public class SQLReservas_Habitaciones {
 			long pIdPlanDeConsumo, String pFechaInicio, String pFechaFin) {
 		Query q = pm.newQuery(SQL, "INSERT INTO " + "RESERVAS_HABITACIONES" + 
 				"(ID, ID_CLIENTE, TIPO_IDENTIFICACION, ID_HABITACION, ID_PLAN_DE_CONSUMO, "
-				+ "FECHA_INICIO, FECHA_FIN, CHECKED_IN, CHECKED_OUT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		q.setParameters(pId, pIdCliente, pIdTipoId, pIdHabitacion, pIdPlanDeConsumo, pFechaInicio, pFechaFin, 0, 0);
+				+ "FECHA_INICIO, FECHA_FIN, CHECKED_IN, CHECKED_OUT, PAZ_Y_SALVO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		q.setParameters(pId, pIdCliente, pIdTipoId, pIdHabitacion, pIdPlanDeConsumo, pFechaInicio, pFechaFin, 0, 0, 0);
 		return (long) q.executeUnique();
 	}
 

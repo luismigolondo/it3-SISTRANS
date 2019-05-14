@@ -32,10 +32,10 @@ public class CadenaHoteles {
 		return convencion;
 	}
 
-	public long eliminarConvencion(long id)
+	public String eliminarConvencion(long id)
 	{
 		log.info("Eliminando convencion: ");
-		long convencion = persistencia.eliminarConvencion(id);
+		String convencion = persistencia.eliminarConvencion(id);
 		log.info("Se aelimino convencion: ");
 		return convencion;
 	}
@@ -125,10 +125,10 @@ public class CadenaHoteles {
 	}
 
 	//RF14
-	public long registrarFinConvencion()
+	public String registrarFinConvencion(long id)
 	{
 		log.info("Registrando fin de la convencion: " );
-		long checkout = persistencia.RF14registrarFinConvencion();
+		String checkout = persistencia.RF14registrarFinConvencion(id);
 		log.info("Se realiz� el fin de la convencion");
 		return checkout;
 	}

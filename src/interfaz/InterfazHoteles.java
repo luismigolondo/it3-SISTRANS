@@ -432,7 +432,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			String b = hoteles.cancelarReservasConvencion(idConvencion,habs,servs);
 			
 			String resultado = "En cancelarReservaHabitacionesYServicios\n\n";
-			resultado += "DESRESEVACION realizada exitosamente";
+			resultado += "DESRESERVACION realizada exitosamente";
 			resultado += "\n Operaci�n terminada";
 			resultado+="\n IDS DE LAS RESERVAS CANCELADAS"+b;
 			panelDatos.actualizarInterfaz(resultado);
@@ -446,8 +446,12 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	}
 
 	public void RF14registrarFinConvencion(){
+
+		long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
 		
-		System.out.println("funciona14");
+		
+		
+		String resultado = "";
 	}
 
 	public void RF15registrarEntradaMantenimiento(){

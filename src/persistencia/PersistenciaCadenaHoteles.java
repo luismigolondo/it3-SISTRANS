@@ -161,13 +161,13 @@ public class PersistenciaCadenaHoteles {
         }
 	}
 	
-	public long eliminarConvencion(long id) {
+	public String eliminarConvencion(long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            long resp = sqlConvenciones.eliminarConvencion(pm, id);
+            String resp = sqlConvenciones.eliminarConvencion(pm, id);
             tx.commit();
             return resp;
         }
@@ -175,7 +175,7 @@ public class PersistenciaCadenaHoteles {
         {
 //        	e.printStackTrace();
         	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-            return -1;
+            return "No se pudo borrar la convencion";
         }
         finally
         {
@@ -573,9 +573,27 @@ public class PersistenciaCadenaHoteles {
 		}
 	}
 	
-	public long RF14registrarFinConvencion()
+	public String RF14registrarFinConvencion(long id)
 	{
-		return 0;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			String resp = sqlConvenciones.eliminarConvencion(pm, id);
+			tx.commit();
+			return resp;
+		}
+		catch(Exception e)
+		{
+			log.error("Exception : "+e.getMessage()+ "\n" + darDetalleException(e));
+			return ""+-1;
+		}
+		finally{
+			if(tx.isActive())
+				tx.rollback();
+			pm.close();
+		}
+		
 	}
 	
 	public String RF15registrarEntradaMantenimiento(long id, long idHotel, String habs, String servs, String fechaIni, String fechaFin)
