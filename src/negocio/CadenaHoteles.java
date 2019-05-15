@@ -4,6 +4,8 @@
 package negocio;
 
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.gson.JsonObject;
@@ -178,5 +180,68 @@ public class CadenaHoteles {
         return bebedor;
 	}
 
+	public List<RFC1> rfc1(String fechaInicio, String fechaFin) {
+		log.info("Generando consulta RFC1");
+		List<RFC1> lista = new LinkedList<RFC1>();
+		for (RFC1 r : persistencia.rfc1(fechaInicio, fechaFin))
+		{
+			lista.add(r);
+		}
+		log.info("Generando " + lista.size() + " ganancias de habitaciones");
+		return lista;
+	}
+	
+	public List<RFC2> rfc2() {
+		log.info("Generando consulta RFC2");
+		List<RFC2> lista = new LinkedList<RFC2>(persistencia.rfc2());
+		log.info("Generando " + lista.size() + " servicios mas populares");
+		return lista;
+	}
+	
+	public List<RFC3> rfc3(String fechaInicio, String fechaFin) {
+		log.info("Generando consulta RFC3");
+		List<RFC3> lista = new LinkedList<RFC3>();
+		for (RFC3 r : persistencia.rfc3(fechaInicio, fechaFin))
+		{
+			lista.add(r);
+		}
+		log.info("Generando " + lista.size() + " indices de ocupacion habitaciones");
+		return lista;
+	}
+	
+	public List<Servicio> rfc4(long idServicio, long idHotel, String nombre, int horaA, int horaC, String tipo)
+	{
+		log.info("Generando consulta RFC4");
+		List<Servicio> lista = new LinkedList<Servicio>();
+		List<Servicio> l = persistencia.rfc4(idServicio, idHotel, nombre, horaA, horaC, tipo);
+		for (Servicio r : l)
+		{
+			lista.add(r);
+		}
+		log.info("Generando " + lista.size() + " servicios con caracteristica " + tipo);
+		return lista;
+	}
+	
+	public List<RFC6> rfc6() {
+		log.info("Generando consulta RFC6");
+		List<RFC6> lista = new LinkedList<RFC6>();
+		for (RFC6 r : persistencia.rfc6())
+		{
+			lista.add(r);
+		}
+		log.info("Generando " + lista.size() + " analisis de operacion");
+		return lista;
+	}
+	
+	public List<RFC7> rfc7() {
+		log.info("Generando consulta RFC7");
+		List<RFC7> lista = new LinkedList<RFC7>();
+		for (RFC7 r : persistencia.rfc7())
+		{
+			lista.add(r);
+		}
+		log.info("Generando " + lista.size() + " buenos clientes");
+		return lista;
+	}
 
 }

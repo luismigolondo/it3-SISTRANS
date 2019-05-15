@@ -12,65 +12,53 @@ import java.util.List;
  */
 public class Servicio implements VOServicio{
 
-	private Long id;
+	private long id;
 	
+	private long id_hotel;
+
 	private String nombre;
 	
-	private String horaApertura;
+	private int hora_apertura;
 	
-	private String horaCierre;
+	private int hora_cierre;
 	
 	private String tipo;
 	
 	private String descripcion;
-	
-	private Hotel hotel;
-	
-	private List<Long> productos;
-	
+		
 	public Servicio() {
-		this.id = null;
+		this.id = 0;
 		this.nombre = null;
-		this.horaApertura = null;
-		this.horaCierre = null;
+		this.hora_apertura = 0;
+		this.hora_cierre = 0;
 		this.tipo = null;
 		this.descripcion = null;
-		hotel=null;
-		productos=null;
+		id_hotel=0;
 	}
 	
-	public Servicio(Long id, String nombre, String horaApertura, String horaCierre, String tipo, String descripcion, Hotel hotel, List productos) {
+	public Servicio(Long id, String nombre, int horaApertura, int horaCierre, String tipo, String descripcion, long hotel) {
 		this.id = id;
 		this.nombre = nombre;
-		this.horaApertura = horaApertura;
-		this.horaCierre = horaCierre;
+		this.hora_apertura = horaApertura;
+		this.hora_cierre = horaCierre;
 		this.tipo = tipo;
 		this.descripcion = descripcion;
-		this.hotel=hotel;
-		this.productos=productos;
+		this.id_hotel=hotel;
 	}
 
 
-	public Hotel getHotel() {
-		return hotel;
+	public long getHotel() {
+		return id_hotel;
 	}
 
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
-	}
-
-	public List<Long> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(List<Long> productos) {
-		this.productos = productos;
+	public void setHotel(long hotel) {
+		this.id_hotel = hotel;
 	}
 
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -102,32 +90,32 @@ public class Servicio implements VOServicio{
 	/**
 	 * @return the horaApertura
 	 */
-	public String getHoraApertura() {
-		return horaApertura;
+	public int getHoraApertura() {
+		return hora_apertura;
 	}
 
 
 	/**
 	 * @param horaApertura the horaApertura to set
 	 */
-	public void setHoraApertura(String horaApertura) {
-		this.horaApertura = horaApertura;
+	public void setHoraApertura(int horaApertura) {
+		this.hora_apertura = horaApertura;
 	}
 
 
 	/**
 	 * @return the horaCierre
 	 */
-	public String getHoraCierre() {
-		return horaCierre;
+	public int getHoraCierre() {
+		return hora_cierre;
 	}
 
 
 	/**
 	 * @param horaCierre the horaCierre to set
 	 */
-	public void setHoraCierre(String horaCierre) {
-		this.horaCierre = horaCierre;
+	public void setHoraCierre(int horaCierre) {
+		this.hora_cierre = horaCierre;
 	}
 
 
