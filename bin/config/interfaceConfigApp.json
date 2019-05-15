@@ -1,0 +1,172 @@
+{
+	"title": "Aplicacion transaccional de HotelAndes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./resources/config/hotelImg.png",
+	"menuBar":
+	[
+		{ "menuTitle": "Req.Func. Modificacion",
+		  "options":
+			[
+				{
+					"label": "REG. RESERVA DE ALOJAMIENTO RF7",
+					"event": "RF7registrarReservaHabitacion"
+				},
+				{
+					"label": "REG.RESERVA SERVICIO CLIENTE RF8",
+					"event": "RF8registrarReservaServicio"
+				},
+				{
+					"label": "REG. LLEGADA CLIENTE RF9",
+					"event": "RF9registrarLlegadaCliente"
+				},
+				{
+					"label": "REG. CONSUMO CLIENTE RF10",
+					"event": "RF10registrarConsumoServicio"
+				},
+				{
+					"label": "REG. SALIDA CLIENTE RF11",
+					"event": "RF11registrarSalidaCliente"
+				},
+				{
+					"label": "REG. RESERVA HABs Y SERVs RF12",
+					"event": "RF12reservarHabServs"
+				},
+				{
+					"label": "CANCELAR RESERVAS CONVENCION RF13",
+					"event": "RF13cancelarReservasConvencion"
+				},
+				{
+					"label": "REG. FIN CONVENCION RF14",
+					"event": "RF14registrarFinConvencion"
+				},
+				{
+					"label": "REG. MANTENIMIENTO HABs O SERVs RF15",
+					"event": "RF15registrarEntradaMantenimiento"
+				},
+				{
+					"label": "REG. FIN MANTENIMIENTO HABs Y SERVs RF16",
+					"event": "RF16registrarFinMantenimiento"
+				}
+			]
+		},
+		{ "menuTitle": "Req.Func. Consulta",
+		  "options":
+			[
+				{
+					"label": "RFC1 - GANANCIA HABITACION",
+					"event": "rfc1"
+				},
+				{
+					"label": "RFC2 - 20 SERV. MAS POPULARES",
+					"event": "rfc2"
+				},
+				{
+					"label": "RFC3 - INDICE OCUPACION HABITACIONES",
+					"event": "rfc3"
+				},
+				{
+					"label": "RFC4 - SERVICIOS CON CARACTERISTICA",
+					"event": "rfc4"
+				},
+				{
+					"label": "RFC5X - CONSUMO POR USUARIO",
+					"event": "rfc5"
+				},
+				{
+					"label": "RFC6 - ANALIZAR OPERACION",
+					"event": "rfc6"
+				},
+				{
+					"label": "RFC7 - ENCONTRAR BUENOS CLIENTES",
+					"event": "rfc7"
+				},
+				{
+					"label": "RFC8X - ENCONTRAR SERVICIOS POCA DEMANDA",
+					"event": "rfc8"
+				},
+				{
+					"label": "RFC9 - CONSULTAR CONSUMO EN HOTELANDES",
+					"event": "rfc9"
+				},
+				{
+					"label": "RFC10 - CONSULTAR CONSUMO EN HOTELANDESV2",
+					"event": "rfc10"
+				},
+				{
+					"label": "RFC11 - CONSULTAR FUNCIONAMIENTO",
+					"event": "rfc11"
+				},
+				{
+					"label": "RFC12 - CONSULTAR LOS BUENOS CLIENTES",
+					"event": "rfc12"
+				}
+			]
+		},
+		{ "menuTitle": "Mantenimiento",
+		  "options":
+			[
+				{
+					"label": "Mostrar log HotelAndes",
+					"event": "mostrarLogParranderos"
+				},
+				{
+					"label": "Mostrar log datanucleus",
+					"event": "mostrarLogDatanuecleus"
+				},
+				{
+					"label": "Limpiar log de HotelAndes",
+					"event": "limpiarLogParranderos"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},		
+		{ "menuTitle": "Documentacion",
+		  "options":
+			[
+				{
+					"label": "Presentacion general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creacion de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc HotelAndes",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Acerca de ...",
+		  "options":
+			[
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}		
+		
+	]
+}
+	
