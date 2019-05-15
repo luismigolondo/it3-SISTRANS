@@ -32,10 +32,10 @@ public class CadenaHoteles {
 		return convencion;
 	}
 
-	public long eliminarConvencion(long id)
+	public String eliminarConvencion(long id)
 	{
 		log.info("Eliminando convencion: ");
-		long convencion = persistencia.eliminarConvencion(id);
+		String convencion = persistencia.eliminarConvencion(id);
 		log.info("Se aelimino convencion: ");
 		return convencion;
 	}
@@ -107,28 +107,28 @@ public class CadenaHoteles {
 	}
 
 	//RF12
-	public String reservarHabServs(long id,long idConvencion, long idHotel, String habs, String servs)
+	public String reservarHabServs(long idConvencion, long idHotel, String habs, String servs)
 	{
 		log.info("Realizando la reserva de habitaciones y servicios: " );
-		String checkout = persistencia.RF12reservarHabServs(id,idConvencion, idHotel, habs, servs);
+		String checkout = persistencia.RF12reservarHabServs(idConvencion, idHotel, habs, servs);
 		log.info("Se realiz� la reserva de habitaciones y servicios");
 		return checkout;
 	}
 
 	//RF13
-	public String cancelarReservasConvencion(long idConvencion, long idHotel, String habs, String servs)
+	public String cancelarReservasConvencion(long idConvencion, String habs, String servs)
 	{
 		log.info("Realizando cancelacion de las reserva de habitaciones y servicios: " );
-		String checkout = persistencia.RF13cancelarReservasConvencion(idConvencion,idHotel,habs,servs);
+		String checkout = persistencia.RF13cancelarReservasConvencion(idConvencion,habs,servs);
 		log.info("Se realiz� la cancelacioj de las reservas de habitaciones y servicios");
 		return checkout;
 	}
 
 	//RF14
-	public long registrarFinConvencion()
+	public String registrarFinConvencion(long id)
 	{
 		log.info("Registrando fin de la convencion: " );
-		long checkout = persistencia.RF14registrarFinConvencion();
+		String checkout = persistencia.RF14registrarFinConvencion(id);
 		log.info("Se realiz� el fin de la convencion");
 		return checkout;
 	}

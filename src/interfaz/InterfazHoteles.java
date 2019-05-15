@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -49,7 +50,8 @@ import negocio.VOReservaServicio;
  */
 @SuppressWarnings("serial")
 public class InterfazHoteles extends JFrame implements ActionListener{
-	
+
+	//first commit juancris
 
 	//---------------------------------------------------
 	// CONSTANTES
@@ -68,7 +70,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	/**
 	 * Ruta al archivo de configuraci�n de los nombres de tablas de la base de datos
 	 */
-	private static final String CONFIG_TABLAS = "./resources/config/TablasBD_A.json"; 
+	private static final String CONFIG_TABLAS = "./resources/config/TablasBD_A.json";
 
 	//---------------------------------------------------
 	// ATRIBUTOS
@@ -83,6 +85,12 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	private PanelDeDatos panelDatos;
 
 	private JMenuBar menuBar;
+
+	private int usuarioNeutro = 1;
+
+	private int recepcionista = 2;
+	private int contraRecepcionista=123;
+
 
 	/* ****************************************************************
 	 * 			M�todos
@@ -216,291 +224,371 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	//------------------------------------
 	// Metodos de requerimientos
 	//------------------------------------
+
+	public boolean login(){
+		int contra = Integer.parseInt(JOptionPane.showInputDialog (this, "Ingrese la clave", "Operacion restringida", JOptionPane.QUESTION_MESSAGE));
+		if(contra==contraRecepcionista)
+			return true;
+		JOptionPane.showMessageDialog(this, "Clave incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+		return false;
+	}
+
 	public void RF7registrarReservaHabitacion( )
 	{
-		try 
-		{
-			long hotel =  Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "Ingrese ID del Hotel", JOptionPane.QUESTION_MESSAGE));
-			long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva a crear", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
-			long idCliente = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese la cedula de ciduadania del cliente", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
-			long tipoId = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el tipo de identificacion", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
-			String nombreUsuario = JOptionPane.showInputDialog (this, "Ingrese el nombre del usuario para registrar", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE);
-			String correoUsuario = JOptionPane.showInputDialog (this, "Ingrese el correo electronico del usuario para registrar", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE);
-			long idHabitacion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el numero de la habitacion", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
-			long idPlanDeConsumo = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el plan de consumo para la reserva", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
-			String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE);
-			String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE);
-
-			if (id != 0 && idCliente != 0 && tipoId != 0&& idHabitacion != 0&& idPlanDeConsumo != 0&& idFinic != null&& idFfin != null)
+		if(login()==true){
+			try 
 			{
-				hoteles.adicionarCliente(hotel, idCliente, tipoId, idHabitacion, 0, nombreUsuario, correoUsuario);
-				VOReservaHabitacion tb = hoteles.adicionarReservaHabitacion(id, idCliente, tipoId, idHabitacion, idPlanDeConsumo, idFinic, idFfin);
-				if (tb == null)
+				long hotel =  Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "Ingrese ID del Hotel", JOptionPane.QUESTION_MESSAGE));
+				long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva a crear", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
+				long idCliente = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese la cedula de ciduadania del cliente", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
+				long tipoId = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el tipo de identificacion", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
+				String nombreUsuario = JOptionPane.showInputDialog (this, "Ingrese el nombre del usuario para registrar", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE);
+				String correoUsuario = JOptionPane.showInputDialog (this, "Ingrese el correo electronico del usuario para registrar", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE);
+				long idHabitacion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el numero de la habitacion", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
+				long idPlanDeConsumo = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el plan de consumo para la reserva", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
+				String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE);
+				String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE);
+
+				if (id != 0 && idCliente != 0 && tipoId != 0&& idHabitacion != 0&& idPlanDeConsumo != 0&& idFinic != null&& idFfin != null)
 				{
-					throw new Exception ("No se pudo crear la reserva " + id + ", para el cliente: " + nombreUsuario);
+					hoteles.adicionarCliente(hotel, idCliente, tipoId, idHabitacion, 0, nombreUsuario, correoUsuario);
+					VOReservaHabitacion tb = hoteles.adicionarReservaHabitacion(id, idCliente, tipoId, idHabitacion, idPlanDeConsumo, idFinic, idFfin);
+					if (tb == null)
+					{
+						throw new Exception ("No se pudo crear la reserva " + id + ", para el cliente: " + nombreUsuario);
+					}
+					String resultado = "En adicionarReservaHabitacion\n\n";
+					resultado += "Reserva adicionada exitosamente: " + tb;
+					resultado += "\n Operacion terminada";
+					panelDatos.actualizarInterfaz(resultado);
 				}
-				String resultado = "En adicionarReservaHabitacion\n\n";
-				resultado += "Reserva adicionada exitosamente: " + tb;
-				resultado += "\n Operacion terminada";
+				else
+				{
+					panelDatos.actualizarInterfaz("Operaci�n cancelada por recepcion");
+				}
+			} 
+			catch (Exception e) 
+			{
+				//			e.printStackTrace();
+				String resultado = generarMensajeError(e);
 				panelDatos.actualizarInterfaz(resultado);
 			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operaci�n cancelada por recepcion");
-			}
-		} 
-		catch (Exception e) 
-		{
-			//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
 
 	public void RF8registrarReservaServicio( )
 	{
-		try 
-		{
-			long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva de servicio a crear", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
-			long idCliente = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese la cedula de ciduadania del cliente", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
-			long tipoId = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el tipo de identificacion", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
-			long idServicio = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el tipo de servicio", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
-			String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE);
-			String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Agregar nueva reserva de Servicion", JOptionPane.QUESTION_MESSAGE);
-
-			if (id != 0)
+		if(login()==true){
+			try 
 			{
-				VOReservaServicio tb = hoteles.adicionarReservaServicio(id, idFinic, idFfin, idCliente, tipoId, idServicio);
-				if (tb == null)
+				long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva de servicio a crear", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
+				long idCliente = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese la cedula de ciduadania del cliente", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
+				long tipoId = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el tipo de identificacion", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
+				long idServicio = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el tipo de servicio", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
+				String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE);
+				String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Agregar nueva reserva de Servicion", JOptionPane.QUESTION_MESSAGE);
+
+				if (id != 0)
 				{
-					throw new Exception ("No se pudo crear la reserva: " + id);
+					VOReservaServicio tb = hoteles.adicionarReservaServicio(id, idFinic, idFfin, idCliente, tipoId, idServicio);
+					if (tb == null)
+					{
+						throw new Exception ("No se pudo crear la reserva: " + id);
+					}
+					String resultado = "En adicionarReservaServicio\n\n";
+					resultado += "Reserva adicionada exitosamente: " + tb;
+					resultado += "\n Operacion terminada";
+					panelDatos.actualizarInterfaz(resultado);
 				}
-				String resultado = "En adicionarReservaServicio\n\n";
-				resultado += "Reserva adicionada exitosamente: " + tb;
-				resultado += "\n Operacion terminada";
+				else
+				{
+					panelDatos.actualizarInterfaz("Operaci�n cancelada por recepcion");
+				}
+			} 
+			catch (Exception e) 
+			{
+				//			e.printStackTrace();
+				String resultado = generarMensajeError(e);
 				panelDatos.actualizarInterfaz(resultado);
 			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operaci�n cancelada por recepcion");
-			}
-		} 
-		catch (Exception e) 
-		{
-			//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
 
 	public void RF9registrarLlegadaCliente(long pIdReserva)
 	{
-		try
-		{
-			long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva para activar el checkin", "Realizar checkin", JOptionPane.QUESTION_MESSAGE));
-			if(id!=0)
+		if(login()==true){
+			try
 			{
-				long tb = hoteles.registrarLlegadaCliente(pIdReserva);
-				if(tb==0)
+				long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva para activar el checkin", "Realizar checkin", JOptionPane.QUESTION_MESSAGE));
+				if(id!=0)
 				{
-					throw new Exception("No se puede realizar el checkin a la reserva: "+id);
+					long tb = hoteles.registrarLlegadaCliente(pIdReserva);
+					if(tb==0)
+					{
+						throw new Exception("No se puede realizar el checkin a la reserva: "+id);
+					}
+					String resultado = "En activar checkin usuario\n\n";
+					resultado += "Checkin realizado exitosamente: " + tb;
+					resultado += "\n Operaci�n terminada";
+					panelDatos.actualizarInterfaz(resultado);
 				}
-				String resultado = "En activar checkin usuario\n\n";
-				resultado += "Checkin realizado exitosamente: " + tb;
-				resultado += "\n Operaci�n terminada";
+			}
+			catch(Exception e)
+			{
+				String resultado = generarMensajeError(e);
 				panelDatos.actualizarInterfaz(resultado);
 			}
-		}
-		catch(Exception e)
-		{
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
 
 	public void RF10registrarConsumoServicio()
 	{
-		try {    		
-			long idHabitacion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el id de la habitacion", "Ingresar Gasto", JOptionPane.QUESTION_MESSAGE));
-			long idProducto = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el id del producto para cobrar", "Ingresar Gasto", JOptionPane.QUESTION_MESSAGE));
-			String pFecha= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Ingresar Gasto", JOptionPane.QUESTION_MESSAGE);
+		if(login()==true){
+			try {    		
+				long idHabitacion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el id de la habitacion", "Ingresar Gasto", JOptionPane.QUESTION_MESSAGE));
+				long idProducto = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el id del producto para cobrar", "Ingresar Gasto", JOptionPane.QUESTION_MESSAGE));
+				String pFecha= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Ingresar Gasto", JOptionPane.QUESTION_MESSAGE);
 
-			if(idHabitacion!=0 && idProducto!=0)
-			{
-				Gasto tb = hoteles.registrarConsumoServicio(idHabitacion, idProducto, pFecha);
-				if(tb==null)
+				if(idHabitacion!=0 && idProducto!=0)
 				{
-					throw new Exception ("No se puedo registrar el gasto a la habitacion "+idHabitacion+" del producto "+idProducto);
+					Gasto tb = hoteles.registrarConsumoServicio(idHabitacion, idProducto, pFecha);
+					if(tb==null)
+					{
+						throw new Exception ("No se puedo registrar el gasto a la habitacion "+idHabitacion+" del producto "+idProducto);
+					}
+					String resultado = "En registrarConsumoServicio\n\n";
+					resultado += "Gasto adicionado exitosamente: " + tb;
+					resultado += "\n Operaci�n terminada";
+					panelDatos.actualizarInterfaz(resultado);
 				}
-				String resultado = "En registrarConsumoServicio\n\n";
-				resultado += "Gasto adicionado exitosamente: " + tb;
-				resultado += "\n Operaci�n terminada";
+			}
+			catch(Exception e)
+			{
+				String resultado = generarMensajeError(e);
 				panelDatos.actualizarInterfaz(resultado);
 			}
 		}
-		catch(Exception e)
-		{
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-
 	}
 
 	public void RF11registrarSalidaCliente()
 	{
-		try {
-			long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva para checkout", "Realizar checkout", JOptionPane.QUESTION_MESSAGE));
-			if(id!=0)
-			{
-				long tb = hoteles.registrarSalidaCliente(id);
-				if(tb==0)
+		if(login()==true){
+			try {
+				long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva para checkout", "Realizar checkout", JOptionPane.QUESTION_MESSAGE));
+				if(id!=0)
 				{
-					throw new Exception("No se puede realizar el checkout a la reserva: "+id);
+					long tb = hoteles.registrarSalidaCliente(id);
+					if(tb==0)
+					{
+						throw new Exception("No se puede realizar el checkout a la reserva: "+id);
+					}
+					String resultado = "En adicionarReservaHabitacion\n\n";
+					resultado += "Checkout realizado exitosamente: " + tb;
+					resultado += "\n Operaci�n terminada";
+					panelDatos.actualizarInterfaz(resultado);
 				}
-				String resultado = "En adicionarReservaHabitacion\n\n";
-				resultado += "Checkout realizado exitosamente: " + tb;
-				resultado += "\n Operaci�n terminada";
+				else
+				{
+					panelDatos.actualizarInterfaz("Operaci�n cancelada por recepcion");
+				}
+
+			}catch(Exception e){
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
 				panelDatos.actualizarInterfaz(resultado);
 			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operaci�n cancelada por recepcion");
-			}
-
-		}catch(Exception e){
-			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
 
 	public void RF12reservarHabServs(){
-		try 
-		{
-			long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva a crear", "", JOptionPane.QUESTION_MESSAGE));
-			long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
-			long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
+		if(login()==true){
+			try 
+			{
+				long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
+				long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
 
-			if(hoteles.darConvencion(idConvencion) == null)
-			{
-				JOptionPane.showMessageDialog(this, "Se procede a crear la convencion", "Creacion de convencion", JOptionPane.ERROR_MESSAGE);
-				String pFechaInic= JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA", "Crear Convencion", JOptionPane.QUESTION_MESSAGE);
-				String pFechaFin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Crear Convencion", JOptionPane.QUESTION_MESSAGE);
-				Convencion c = hoteles.adicionarConvencion(pFechaInic, pFechaFin, idHotel, idConvencion);
-				if(c == null)
-					throw new Exception("No se pudo crear la convencion");
-				JOptionPane.showMessageDialog(this, "Enhorabuena! Se ha creado la convencion", "Creacion convencion exitosa", JOptionPane.INFORMATION_MESSAGE);
+				if(hoteles.darConvencion(idConvencion) == null)
+				{
+					JOptionPane.showMessageDialog(this, "Se procede a crear la convencion", "Creacion de convencion", JOptionPane.ERROR_MESSAGE);
+					String pFechaInic= JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA", "Crear Convencion", JOptionPane.QUESTION_MESSAGE);
+					String pFechaFin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Crear Convencion", JOptionPane.QUESTION_MESSAGE);
+					Convencion c = hoteles.adicionarConvencion(pFechaInic, pFechaFin, idHotel, idConvencion);
+					if(c == null)
+						throw new Exception("No se pudo crear la convencion");
+					JOptionPane.showMessageDialog(this, "Enhorabuena! Se ha creado la convencion", "Creacion convencion exitosa", JOptionPane.INFORMATION_MESSAGE);
+				}
+
+				String habSuite = JOptionPane.showInputDialog (this, "Ingrese la cantidad de habitaciones SUITE", "Ingresar numero de habitaciones", JOptionPane.QUESTION_MESSAGE); 
+				String habSuite_P = JOptionPane.showInputDialog (this, "Ingrese la cantidad de habitaciones SUITE PRESIDENCIAL", "Ingresar numero de habitaciones", JOptionPane.QUESTION_MESSAGE); 
+				String habSencilla = JOptionPane.showInputDialog (this, "Ingrese la cantidad de habitaciones SENCLLAS", "Ingresar numero de habitaciones", JOptionPane.QUESTION_MESSAGE); 
+				String concat = "1:"+habSuite;
+				concat+=";2:"+habSuite_P;
+				concat+=";3:"+habSencilla;
+				System.out.println("ESTO SE IMPRIME HABITACIONES:"+concat);
+				String servicios = JOptionPane.showInputDialog (this, "Ingrese los servicios requeridos separados por una coma", "Ingresar servicios", JOptionPane.QUESTION_MESSAGE); 
+				System.out.println("ESTO IMPRIME SERVICIOS: "+servicios);
+				String b = hoteles.reservarHabServs(idConvencion,idHotel,concat,servicios);
+				if(b.equals(""))
+				{
+					throw new Exception("No se puede realizar las reservas para la convencion");
+				}
+				String resultado = "En reservarHabitacionesYServicios\n\n";
+				resultado += "Reservas realizada exitosamente";
+				resultado += "\n Operaci�n terminada";
+				resultado+="\n IDS DE LAS RESERVAS REALIZADAS"+b;
+				panelDatos.actualizarInterfaz(resultado);
 			}
-			
-			String habSuite = JOptionPane.showInputDialog (this, "Ingrese la cantidad de habitaciones SUITE", "Ingresar numero de habitaciones", JOptionPane.QUESTION_MESSAGE); 
-			String habSuite_P = JOptionPane.showInputDialog (this, "Ingrese la cantidad de habitaciones SUITE PRESIDENCIAL", "Ingresar numero de habitaciones", JOptionPane.QUESTION_MESSAGE); 
-			String habSencilla = JOptionPane.showInputDialog (this, "Ingrese la cantidad de habitaciones SENCLLAS", "Ingresar numero de habitaciones", JOptionPane.QUESTION_MESSAGE); 
-			String concat = "1:"+habSuite;
-			concat+=";2:"+habSuite_P;
-			concat+=";3:"+habSencilla;
-			
-			String servicios = JOptionPane.showInputDialog (this, "Ingrese los servicios requeridos separados por una coma", "Ingresar servicios", JOptionPane.QUESTION_MESSAGE); 
-			String b = hoteles.reservarHabServs(id,idConvencion,idHotel,concat,servicios);
-			if(b.equals(""))
+			catch(Exception e)
 			{
-				throw new Exception("No se puede realizar las reservas para la convencion");
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
 			}
-			String resultado = "En reservarHabitacionesYServicios\n\n";
-			resultado += "Reservas realizada exitosamente";
-			resultado += "\n Operaci�n terminada";
-			resultado+="\n IDS DE LAS RESERVAS REALIZADAS"+b;
-			panelDatos.actualizarInterfaz(resultado);
 		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-		
+
 	}
 
 	public void RF13cancelarReservasConvencion(){
-		try 
-		{
-			long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
-			long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
+		if(login()==true){
+			try 
+			{
+				long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
 
-			
-			String habs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de las habitaciones a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
-			String servs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de los servicios a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
-			
-			String b = hoteles.cancelarReservasConvencion(idConvencion, idHotel,habs,servs);
-			
-			String resultado = "En cancelarReservaHabitacionesYServicios\n\n";
-			resultado += "DESRESEVACION realizada exitosamente";
-			resultado += "\n Operaci�n terminada";
-			resultado+="\n IDS DE LAS RESERVAS CANCELADAS"+b;
-			panelDatos.actualizarInterfaz(resultado);
+				String habs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de las habitaciones a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
+				String servs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de los servicios a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
+
+				String b = hoteles.cancelarReservasConvencion(idConvencion,habs,servs);
+
+				String resultado = "En cancelarReservaHabitacionesYServicios\n\n";
+				resultado += "DESRESERVACION realizada exitosamente";
+				resultado += "\n Operaci�n terminada";
+				resultado+="\n IDS DE LAS RESERVAS CANCELADAS"+b;
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-		
 	}
 
 	public void RF14registrarFinConvencion(){
-		
-		System.out.println("funciona14");
+		if(login()==true){
+			
+			try{
+				String resultado="";
+				long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
+				resultado+="En finalizar convencion \n";
+				String b = hoteles.registrarFinConvencion(idConvencion);
+				resultado+="\n CUENTAS CALCULADAS \n";
+				resultado+="PASO A COBRAR INDIVIDUALMENTE Y A LA CONVENCION \n";
+				resultado+="\n"+b;
+				resultado += "\n Operaci�n terminada";
+				panelDatos.actualizarInterfaz(resultado);
+				String[] deudores = b.split(",");
+				for(int e=1;e<deudores.length;e++){
+					//					System.out.println(deudores[e]);
+					String[] simplif = deudores[e].split("DEBE PAGAR");
+					System.out.println(simplif[0]);
+					boolean pazYSalvo=false;
+					if(e!=deudores.length-1){
+						while(!pazYSalvo){						
+							Long dinero = Long.parseLong(JOptionPane.showInputDialog (this, "El cliente "+simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
+							Double pm = dinero.doubleValue();
+							Double pm2 = 0.0;
+							try{
+								pm2 = Double.valueOf(simplif[1]);
+							}
+							catch(Exception y){
+								System.out.println("SE PUTEO EL TRIPLE MIERDA");
+							}
+							if(pm.compareTo(pm2)>=0){
+								JOptionPane.showMessageDialog(this, "PAZ Y SALVO!");
+								pazYSalvo=true;
+								//llamar metodo paz y salvo cliente
+							}
+							else{
+								JOptionPane.showMessageDialog(this, "El dinero ingresado no cubre la deuda, debe ingresar al menos "+simplif[1]);
+							}
+						}
+						pazYSalvo=false;
+					}
+					else{
+						while(!pazYSalvo){
+							long dinero = Long.parseLong(JOptionPane.showInputDialog (this, simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
+							if(dinero>=Long.parseLong(simplif[1])){
+								JOptionPane.showMessageDialog(this, "PAZ Y SALVO!");
+								pazYSalvo=true;
+								//llamar metodo paz y salvo conv 
+							}
+							else{
+								JOptionPane.showMessageDialog(this, "El dinero ingresado no cubre la deuda, debe ingresar al menos "+simplif[1]);
+							}
+						}
+					}
+					System.out.println(simplif[1]);
+				}
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void RF15registrarEntradaMantenimiento(){
-		
-		try 
-		{
-			long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador", "", JOptionPane.QUESTION_MESSAGE));
+		if(login()==true){
+			try 
+			{
+				long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador", "", JOptionPane.QUESTION_MESSAGE));
 
-			long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
+				long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
 
-			String habs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de las habitaciones a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
-			String servs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de los servicios a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
-			
-			String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE);
-			String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Agregar nueva reserva de Servicion", JOptionPane.QUESTION_MESSAGE);
+				String habs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de las habitaciones a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
+				String servs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de los servicios a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
 
-			
-			String b = hoteles.registrarEntradaMantenimiento(id, idHotel,habs,servs,idFinic,idFfin);
-			
-			String resultado = "En cancelarReservaHabitacionesYServicios\n\n";
-			resultado += "DESRESEVACION realizada exitosamente";
-			resultado += "\n Operaci�n terminada";
-			resultado+="\n IDS DE LAS RESERVAS CANCELADAS"+b;
-			panelDatos.actualizarInterfaz(resultado);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
+				String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE);
+				String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Agregar nueva reserva de Servicion", JOptionPane.QUESTION_MESSAGE);
+
+
+				String b = hoteles.registrarEntradaMantenimiento(id, idHotel,habs,servs,idFinic,idFfin);
+
+				String resultado = "En cancelarReservaHabitacionesYServicios\n\n";
+				resultado += "DESRESEVACION realizada exitosamente";
+				resultado += "\n Operaci�n terminada";
+				resultado+="\n IDS DE LAS RESERVAS CANCELADAS"+b;
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
 		}
 	}
 
 	public void RF16registrarFinMantenimiento(){
-		try 
-		{
-			long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
+		if(login()==true){
+			try 
+			{
+				long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
 
-			String habs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de las habitaciones a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
-			String servs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de los servicios a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
-			
-			String b = hoteles.registrarFinMantenimiento(idHotel,habs,servs);
-			
-			String resultado = "En cancelarReservaHabitacionesYServicios\n\n";
-			resultado += "DESRESEVACION realizada exitosamente";
-			resultado += "\n Operaci�n terminada";
-			resultado+="\n IDS DE LAS RESERVAS CANCELADAS"+b;
-			panelDatos.actualizarInterfaz(resultado);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
+				String habs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de las habitaciones a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
+				String servs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de los servicios a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
+
+				String b = hoteles.registrarFinMantenimiento(idHotel,habs,servs);
+
+				String resultado = "En cancelarReservaHabitacionesYServicios\n\n";
+				resultado += "DESRESEVACION realizada exitosamente";
+				resultado += "\n Operaci�n terminada";
+				resultado+="\n IDS DE LAS RESERVAS CANCELADAS"+b;
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
 		}
 	}
 
