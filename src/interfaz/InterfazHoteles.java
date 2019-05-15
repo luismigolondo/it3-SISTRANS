@@ -474,10 +474,19 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 
 	public void RF14registrarFinConvencion(){
 		if(login()==true){
-			long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
 			
-			
-			String resultado = hoteles.registrarFinConvencion(idConvencion);
+			try{
+				long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
+				String b = hoteles.registrarFinConvencion(idConvencion);
+				String resultado="";
+				resultado+="En finalizar convencion \n";
+				resultado += "\n Operaci�n terminada";
+				resultado+="\n CUENTAS CALCULADAS \n"+b;
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			catch(Exception e){
+				
+			}
 		}
 	}
 

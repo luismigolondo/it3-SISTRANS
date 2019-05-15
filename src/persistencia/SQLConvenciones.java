@@ -50,16 +50,14 @@ public class SQLConvenciones {
 			String lel = "SELECT c.NOMBRE,p.VALOR " + "FROM ((CLIENTES c INNER JOIN GASTOS g ON c.ID_RESERVA_HABITACION=g.ID_RESERVA_HABITACION AND c.ID_CONVENCION="+id+")" 
 					+" INNER JOIN PRODUCTOS p ON g.ID_PRODUCTO=p.ID) LEFT OUTER JOIN RESERVAS_CONVENCIONES rc ON p.ID_SERVICIO=rc.ID_SERVICIO WHERE rc.ID_SERVICIO IS NULL"
 					+" ORDER BY c.ID_RESERVA_HABITACION ";
-			System.out.println(lel);
+			
 			Query q = pm.newQuery(SQL,lel);
-			System.out.println("LLEGA EL PELUDO");
+			
 			List<Object> objects = q.executeList();
 			String autorAct = "";
 			Double tot = 0.0;
 			for (Object o : objects) {
 				Object[] datos = (Object[]) o;
-//				System.out.println(datos[0]);
-//				System.out.println(datos[1]);
 				if(!datos[0].equals(autorAct)){
 					respuesta+=autorAct+" DEBE PAGAR "+tot +"\n";
 					autorAct=datos[0].toString();
@@ -67,16 +65,20 @@ public class SQLConvenciones {
 				}
 				tot+=((BigDecimal)datos[1]).longValue();
 			}
-			System.out.println(respuesta);
-			//List<Object> objects = q.executeList();
-			System.out.println("LLEGA AUN MAS LEJOS");
-//			Object[] c = objects.toArray();
+
 			
-//			for(int e=0;e<objects.size();e++){
-//				System.out.println(objects.get(e)+"");
-//			}
-			System.out.println("CHOLE?");
+			String lel2 = "SELECT p.VALOR FROM ((CLIENTES c INNER JOIN GASTOS g ON c.ID_RESERVA_HABITACION=g.ID_RESERVA_HABITACION AND c.ID_CONVENCION="+id+") "
+							+"INNER JOIN PRODUCTOS p ON g.ID_PRODUCTO=p.ID) INNER JOIN RESERVAS_CONVENCIONES rc ON p.ID_SERVICIO=rc.ID_SERVICIO ORDER BY c.ID_RESERVA_HABITACION";
+			Query q2 = pm.newQuery(SQL,lel2);
+			List<Object> objects2 = q2.executeList();
+			Double tot2=0.0;
+			respuesta+="LA CONVENCION CON ID "+id+" DEBE PAGAR ";
 			
+			for (Object o : objects2) {
+
+				tot2+=((BigDecimal)o).longValue();
+			}
+			respuesta+=tot2;
 		}
 		catch(Exception e){
 			e.printStackTrace();
