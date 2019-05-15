@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -476,16 +477,61 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		if(login()==true){
 			
 			try{
-				long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
-				String b = hoteles.registrarFinConvencion(idConvencion);
 				String resultado="";
+				long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
 				resultado+="En finalizar convencion \n";
+				String b = hoteles.registrarFinConvencion(idConvencion);
+				resultado+="\n CUENTAS CALCULADAS \n";
+				resultado+="PASO A COBRAR INDIVIDUALMENTE Y A LA CONVENCION \n";
+				resultado+="\n"+b;
 				resultado += "\n Operaci�n terminada";
-				resultado+="\n CUENTAS CALCULADAS \n"+b;
 				panelDatos.actualizarInterfaz(resultado);
+				String[] deudores = b.split(",");
+				for(int e=1;e<deudores.length;e++){
+					//					System.out.println(deudores[e]);
+					String[] simplif = deudores[e].split("DEBE PAGAR");
+					System.out.println(simplif[0]);
+					boolean pazYSalvo=false;
+					if(e!=deudores.length-1){
+						while(!pazYSalvo){						
+							Long dinero = Long.parseLong(JOptionPane.showInputDialog (this, "El cliente "+simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
+							Double pm = dinero.doubleValue();
+							Double pm2 = 0.0;
+							try{
+								pm2 = Double.valueOf(simplif[1]);
+							}
+							catch(Exception y){
+								System.out.println("SE PUTEO EL TRIPLE MIERDA");
+							}
+							if(pm.compareTo(pm2)>=0){
+								JOptionPane.showMessageDialog(this, "PAZ Y SALVO!");
+								pazYSalvo=true;
+								//llamar metodo paz y salvo cliente
+							}
+							else{
+								JOptionPane.showMessageDialog(this, "El dinero ingresado no cubre la deuda, debe ingresar al menos "+simplif[1]);
+							}
+						}
+						pazYSalvo=false;
+					}
+					else{
+						while(!pazYSalvo){
+							long dinero = Long.parseLong(JOptionPane.showInputDialog (this, simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
+							if(dinero>=Long.parseLong(simplif[1])){
+								JOptionPane.showMessageDialog(this, "PAZ Y SALVO!");
+								pazYSalvo=true;
+								//llamar metodo paz y salvo conv 
+							}
+							else{
+								JOptionPane.showMessageDialog(this, "El dinero ingresado no cubre la deuda, debe ingresar al menos "+simplif[1]);
+							}
+						}
+					}
+					System.out.println(simplif[1]);
+				}
 			}
 			catch(Exception e){
-				
+				e.printStackTrace();
 			}
 		}
 	}

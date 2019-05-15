@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import javax.swing.JOptionPane;
 
 import negocio.Convencion;
 
@@ -47,19 +48,19 @@ public class SQLConvenciones {
 		String respuesta = "";
 		try{
 			
-			String lel = "SELECT c.NOMBRE,p.VALOR " + "FROM ((CLIENTES c INNER JOIN GASTOS g ON c.ID_RESERVA_HABITACION=g.ID_RESERVA_HABITACION AND c.ID_CONVENCION="+id+")" 
+			String lel = "SELECT c.NOMBRE,p.VALOR,g.ID_RESERVA_HABITACION " + "FROM ((CLIENTES c INNER JOIN GASTOS g ON c.ID_RESERVA_HABITACION=g.ID_RESERVA_HABITACION AND c.ID_CONVENCION="+id+")" 
 					+" INNER JOIN PRODUCTOS p ON g.ID_PRODUCTO=p.ID) LEFT OUTER JOIN RESERVAS_CONVENCIONES rc ON p.ID_SERVICIO=rc.ID_SERVICIO WHERE rc.ID_SERVICIO IS NULL"
 					+" ORDER BY c.ID_RESERVA_HABITACION ";
 			
 			Query q = pm.newQuery(SQL,lel);
 			
 			List<Object> objects = q.executeList();
-			String autorAct = "";
+			String autorAct = "-";
 			Double tot = 0.0;
 			for (Object o : objects) {
 				Object[] datos = (Object[]) o;
 				if(!datos[0].equals(autorAct)){
-					respuesta+=autorAct+" DEBE PAGAR "+tot +"\n";
+					respuesta+=autorAct+" "+ (Double.parseDouble(datos[2].toString())-1)+"DEBE PAGAR "+tot +", \n";
 					autorAct=datos[0].toString();
 					tot=0.0;
 				}
