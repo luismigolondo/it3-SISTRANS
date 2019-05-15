@@ -1,8 +1,4 @@
-/.DS_Store
-/META-INF/
-/config/
 /interfaz/
-/log4j.properties
+/config/
 /negocio/
 /persistencia/
-/test/
