@@ -120,10 +120,10 @@ public class SQLConsultas {
 		return l;
 	}
 
-	public String rfc10(PersistenceManager pm, int servicioSeleccionado, String ascdesc) {
+	public String rfc10(PersistenceManager pm, int servicioSeleccionado, String ascdesc,String inic, String fin) {
 		// TODO Auto-generated method stub
 		String lel = "SELECT c.ID AS CEDULA, COUNT(r.ID_SERVICIO) AS TOTAL_SERVICIOS"+" FROM CLIENTES c, RESERVAS_SERVICIOS r"+
-				" WHERE c.ID=r.ID_CLIENTE AND r.ID_SERVICIO!="+servicioSeleccionado+" AND r.HORA_APERTURA>'25/05/2019' AND r.HORA_CIERRE<'30/05/2019'GROUP by c.ID"
+				" WHERE c.ID=r.ID_CLIENTE AND r.ID_SERVICIO!="+servicioSeleccionado+" AND r.HORA_APERTURA>'"+inic+"' AND r.HORA_CIERRE<'"+fin+"'GROUP by c.ID"
 				+ " ORDER BY TOTAL_SERVICIOS "+ascdesc;
 		Query q = pm.newQuery(SQL,lel);
 

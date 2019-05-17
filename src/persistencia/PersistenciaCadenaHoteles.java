@@ -828,10 +828,10 @@ public class PersistenciaCadenaHoteles {
 		return sqlConsultas.rfc9(pm, servicioSeleccionado, ascdesc, inic, fin);
 	}
 
-	public String rfc10(int servicioSeleccionado, String ascdesc) {
+	public String rfc10(int servicioSeleccionado, String ascdesc,String inic, String fin) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm = pmf.getPersistenceManager();
-		return sqlConsultas.rfc10(pm, servicioSeleccionado,ascdesc);
+		return sqlConsultas.rfc10(pm, servicioSeleccionado,ascdesc,inic, fin);
 	}
 
 

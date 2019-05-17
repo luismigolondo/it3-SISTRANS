@@ -822,8 +822,11 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			ascdesc = "ASC";
 		else
 			ascdesc = "DESC";
+		String inic = JOptionPane.showInputDialog (this, "Ingrese la fecha de rango inicial DD/MM/AAAA", "RFC9 - Consulta Consumo", JOptionPane.QUESTION_MESSAGE);
+		String fin = JOptionPane.showInputDialog (this, "Ingrese la fecha de rango final DD/MM/AAAA", "RFC9 - Consulta Consumo", JOptionPane.QUESTION_MESSAGE);
 
-		String b = hoteles.rfc10(servicioSeleccionado,ascdesc);
+
+		String b = hoteles.rfc10(servicioSeleccionado,ascdesc,inic,fin);
 
 		panelDatos.actualizarInterfaz(b);
 		respuesta += "\n Operación terminada";

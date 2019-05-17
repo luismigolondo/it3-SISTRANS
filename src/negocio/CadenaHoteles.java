@@ -272,10 +272,10 @@ public class CadenaHoteles {
 		return lista;
 	}
 
-	public String rfc10(int servicioSeleccionado, String ascdesc) {
+	public String rfc10(int servicioSeleccionado, String ascdesc,String inic, String fin) {
 		// TODO Auto-generated method stub
 		log.info ("Realizando consulta...: ");
-		String bebedor = persistencia.rfc10(servicioSeleccionado,ascdesc);
+		String bebedor = persistencia.rfc10(servicioSeleccionado,ascdesc,inic,fin);
 		log.info ("Procesando informacion obtenida....");
 		return bebedor;
 	}
