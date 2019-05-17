@@ -15,6 +15,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import interfaz.RFC9;
 import negocio.Cliente;
 import negocio.Convencion;
 import negocio.Gasto;
@@ -820,6 +821,11 @@ public class PersistenciaCadenaHoteles {
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		return sqlConsultas.rfc7(pm);
+	}
+
+	public List<RFC9> rfc9(int servicioSeleccionado, String ascdesc, String inic, String fin) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		return sqlConsultas.rfc9(pm, servicioSeleccionado, ascdesc, inic, fin);
 	}
 
 	

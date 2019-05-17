@@ -483,7 +483,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 
 	public void RF14registrarFinConvencion(){
 		if(login()==true){
-			
+
 			try{
 				String resultado="";
 				long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
@@ -508,7 +508,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 						while(!pazYSalvo){	
 							Long idRH = new Double(Double.parseDouble((deudores[e].split("\\*")[1]))).longValue();
 							System.out.println("EL IDDDDDD"+idRH);
-//							Long idRH = Long.parseLong(deudores[e].split("\\*")[1].split(".")[0]);
+							//							Long idRH = Long.parseLong(deudores[e].split("\\*")[1].split(".")[0]);
 							Long dinero = Long.parseLong(JOptionPane.showInputDialog (this, "El cliente "+simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
 							Double pm = dinero.doubleValue();
 							Double pm2 = 0.0;
@@ -534,11 +534,11 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 						while(!pazYSalvo){
 							Long dinero = Long.parseLong(JOptionPane.showInputDialog (this, simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
 							long idConv = Long.parseLong(simplif[0].split("\\*")[1]);
-//							String proces = simplif[1].split("E")[0]+"E+0"+ simplif[1].split("E")[1];
-//							System.out.println(proces+"PERRO LEON");
-//							BigDecimal test = new BigDecimal(proces) ;
-//							BigDecimal test1 = new BigDecimal(dinero);
-	
+							//							String proces = simplif[1].split("E")[0]+"E+0"+ simplif[1].split("E")[1];
+							//							System.out.println(proces+"PERRO LEON");
+							//							BigDecimal test = new BigDecimal(proces) ;
+							//							BigDecimal test1 = new BigDecimal(dinero);
+
 							if(true){
 								JOptionPane.showMessageDialog(this, "PAZ Y SALVO!");
 								pazYSalvo=true;
@@ -618,7 +618,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	/**
 	 * Metodos de requerimientos de consulta
 	 */
-	
+
 	public void rfc1()
 	{
 		try
@@ -626,7 +626,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA Ej: 18/03/2019", "Consultar ganancia habitaciones", JOptionPane.QUESTION_MESSAGE);
 			String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA Ej: 19/03/2019", "Consultar ganancia habitaciones", JOptionPane.QUESTION_MESSAGE);
 			List<RFC1> lista = hoteles.rfc1(idFinic, idFfin);
-			
+
 			String resultado = "Requerimiento funcional de consulta 1: \n";
 			int i = 1;
 			for(RFC1 r : lista)
@@ -641,13 +641,13 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void rfc2()
 	{
 		try
 		{
 			List<RFC2> lista = hoteles.rfc2();
-			
+
 			String resultado = "Requerimiento funcional de consulta 2: \n";
 			int i = 1;
 			for(RFC2 r : lista)
@@ -662,7 +662,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void rfc3()
 	{
 		try
@@ -670,7 +670,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA Ej: 17/03/2019", "Indice ocupacion habitaciones", JOptionPane.QUESTION_MESSAGE);
 			String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA Ej: 17/03/2019", "Indice ocupacion habitaciones", JOptionPane.QUESTION_MESSAGE);
 			List<RFC3> lista = hoteles.rfc3(idFinic, idFfin);
-			
+
 			String resultado = "Requerimiento funcional de consulta 3: \n";
 			int i = 1;
 			for(RFC3 r : lista)
@@ -685,7 +685,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void rfc4()
 	{
 		try
@@ -696,9 +696,9 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			int horaA = Integer.parseInt(JOptionPane.showInputDialog (this, "Ingrese hora de apertura Ej: 8", "Servicios con caracteristica", JOptionPane.QUESTION_MESSAGE));
 			int horaC = Integer.parseInt(JOptionPane.showInputDialog (this, "Ingrese hora de cierre Ej: 21", "Servicios con caracteristica", JOptionPane.QUESTION_MESSAGE));
 			String tipo = JOptionPane.showInputDialog (this, "Ingrese tipo Ej: Alimentacion", "Servicios con caracteristica", JOptionPane.QUESTION_MESSAGE);
-			
+
 			List<Servicio> lista = hoteles.rfc4(idServicio, idHotel, nombre, horaA, horaC, tipo);
-			
+
 			String resultado = "Requerimiento funcional de consulta 4: \n";
 			int i = 1;
 			for(Servicio r : lista)
@@ -713,13 +713,13 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void rfc6()
 	{
 		try
 		{
 			List<RFC6> lista = hoteles.rfc6();
-			
+
 			String resultado = "Requerimiento funcional de consulta 6: \n";
 			int i = 1;
 			for(RFC6 r : lista)
@@ -734,13 +734,13 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void rfc7()
 	{
 		try
 		{
 			List<RFC7> lista = hoteles.rfc7();
-			
+
 			String resultado = "Requerimiento funcional de consulta 7: \n";
 			int i = 1;
 			for(RFC7 r : lista)
@@ -755,11 +755,51 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void rfc9(){
-		
+		try
+		{
+			String[] servicios = {"Piscina", "Gimnasio", "Internet", "Bar HardRock", "Subway", "Supermarket", "Souvenir", "SPA", "Lavado", "Prestamo Toalla"};
+			String[] sort = {"Ascendente", "Descendente"};
+			String servicio = (String) JOptionPane.showInputDialog(this, "RFC9 - Consulta Consumo", "Filtrar por servicio:", JOptionPane.QUESTION_MESSAGE, null, servicios, servicios[0]);
+			int servicioSeleccionado = 0;
+			int i = 0;
+			for(String s: servicios)
+			{
+				if(s.equals(servicio))
+				{
+					servicioSeleccionado = i + 1;
+					break;
+				}
+				i++;
+			}
+			String ascdesc = (String) JOptionPane.showInputDialog(this, "RFC9 - Consulta Consumo", "Ordenar por numero de reservas:", JOptionPane.QUESTION_MESSAGE, null, sort, sort[0]);
+			if(ascdesc.equals("Ascendente"))
+				ascdesc = "ASC";
+			else
+				ascdesc = "DESC";
+			String inic = JOptionPane.showInputDialog (this, "Ingrese la fecha de rango inicial DD/MM/AAAA", "RFC9 - Consulta Consumo", JOptionPane.QUESTION_MESSAGE);
+			String fin = JOptionPane.showInputDialog (this, "Ingrese la fecha de rango final DD/MM/AAAA", "RFC9 - Consulta Consumo", JOptionPane.QUESTION_MESSAGE);
+
+			List<RFC9> lista = hoteles.rfc9(servicioSeleccionado, ascdesc, inic, fin);
+
+			String resultado = "Requerimiento funcional de consulta 7: \n";
+			int j = 1;
+			for(RFC9 r : lista)
+			{
+				resultado += j++ + ". " + r.toString() + "\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
 	}
-	
+
 	/* ****************************************************************
 	 * 			Mï¿½todos administrativos
 	 *****************************************************************/

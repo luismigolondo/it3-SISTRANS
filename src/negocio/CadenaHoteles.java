@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import com.google.gson.JsonObject;
 
+import interfaz.RFC9;
 import persistencia.PersistenciaCadenaHoteles;
 
 /**
@@ -257,6 +258,18 @@ public class CadenaHoteles {
 			lista.add(r);
 		}
 		log.info("Generando " + lista.size() + " buenos clientes");
+		return lista;
+	}
+
+	public List<RFC9> rfc9(int servicioSeleccionado, String ascdesc, String inic, String fin) {
+		log.info("Generando consulta RFC9");
+		List<RFC9> lista = new LinkedList<RFC9>();
+		List<RFC9> l = persistencia.rfc9(servicioSeleccionado, ascdesc, inic, fin);
+		for (RFC9 r : l)
+		{
+			lista.add(r);
+		}
+		log.info("Generando " + lista.size() + " consumo de clientes");
 		return lista;
 	}
 
