@@ -52,4 +52,11 @@ public class SQLReservas_Habitaciones {
 		q.setParameters(1, pIdReserva);
 		return (long) q.executeUnique();
 	}
+
+	public long pazYSalvoCliente(PersistenceManager pm, Long idRH) {
+		// TODO Auto-generated method stub
+		Query q = pm.newQuery(SQL,"UPDATE "+ "RESERVAS_HABITACIONES" + " SET PAZ_Y_SALVO = ? WHERE ID = ?");
+		q.setParameters( 1,idRH);
+		return (long) q.executeUnique();
+	}
 }

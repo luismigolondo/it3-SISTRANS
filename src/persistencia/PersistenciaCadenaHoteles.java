@@ -458,6 +458,28 @@ public class PersistenciaCadenaHoteles {
 		}
 	}
 
+	public long pazYSalvoCliente(Long idRH) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long resp = sqlReservas_Habitaciones.pazYSalvoCliente(pm,idRH);
+			tx.commit();
+			return resp;
+		}
+		catch(Exception e)
+		{
+			log.error("Exception : "+e.getMessage()+ "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally{
+			if(tx.isActive())
+				tx.rollback();
+			pm.close();
+		}
+	}
+	
 	public long RF9registrarLlegadaCliente(long pIdReserva) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -603,6 +625,28 @@ public class PersistenciaCadenaHoteles {
 			pm.close();
 		}
 		
+	}
+	
+	public long pazYSalvoConvencion(long IdConv)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long resp = sqlConvenciones.pazYSalvoConvencion(pm, IdConv);
+			tx.commit();
+			return resp;
+		}
+		catch(Exception e)
+		{
+			log.error("Exception : "+e.getMessage()+ "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally{
+			if(tx.isActive())
+				tx.rollback();
+			pm.close();
+		}
 	}
 	
 	public String RF15registrarEntradaMantenimiento(long id, long idHotel, String habs, String servs, String fechaIni, String fechaFin)
@@ -776,5 +820,9 @@ public class PersistenciaCadenaHoteles {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		return sqlConsultas.rfc7(pm);
 	}
+
+	
+
+	
 	
 }

@@ -61,6 +61,14 @@ public class CadenaHoteles {
 	public void cerrarPersistencia() {
 		persistencia.cerrarPersistencia();
 	}
+	
+	public long pazYSalvoCliente(Long idRH) {
+		log.info("Registrando paz y salvo cliente: " );
+		long checkout = persistencia.pazYSalvoCliente(idRH);
+		log.info("Se realiz� el registro de paz y salvo de cliente...");
+		return checkout;
+		
+	}
 
 	//RF7
 	public ReservaHabitacion adicionarReservaHabitacion(long pId, long pIdCliente, long pIdTipoId, long pIdHabitacion,
@@ -131,6 +139,14 @@ public class CadenaHoteles {
 	{
 		log.info("Registrando fin de la convencion: " );
 		String checkout = persistencia.RF14registrarFinConvencion(id);
+		log.info("Se realiz� el fin de la convencion");
+		return checkout;
+	}
+	
+	public long pazYSalvoConvencion(long IdConv)
+	{
+		log.info("Registrando paz y salvo convencion: " );
+		long checkout = persistencia.pazYSalvoConvencion(IdConv);
 		log.info("Se realiz� el fin de la convencion");
 		return checkout;
 	}
@@ -243,5 +259,7 @@ public class CadenaHoteles {
 		log.info("Generando " + lista.size() + " buenos clientes");
 		return lista;
 	}
+
+	
 
 }

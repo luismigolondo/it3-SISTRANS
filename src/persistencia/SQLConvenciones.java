@@ -60,7 +60,7 @@ public class SQLConvenciones {
 			for (Object o : objects) {
 				Object[] datos = (Object[]) o;
 				if(!datos[0].equals(autorAct)){
-					respuesta+=autorAct+" "+ (Double.parseDouble(datos[2].toString())-1)+"DEBE PAGAR "+tot +", \n";
+					respuesta+=autorAct+" *"+ (Double.parseDouble(datos[2].toString())-1)+"* DEBE PAGAR "+tot +", \n";
 					autorAct=datos[0].toString();
 					tot=0.0;
 				}
@@ -73,7 +73,7 @@ public class SQLConvenciones {
 			Query q2 = pm.newQuery(SQL,lel2);
 			List<Object> objects2 = q2.executeList();
 			Double tot2=0.0;
-			respuesta+="LA CONVENCION CON ID "+id+" DEBE PAGAR ";
+			respuesta+="LA CONVENCION CON ID *"+id+"*DEBE PAGAR ";
 			
 			for (Object o : objects2) {
 
@@ -85,10 +85,21 @@ public class SQLConvenciones {
 			e.printStackTrace();
 		}
 		
-//		Query q = pm.newQuery(SQL, "UPDATE CONVENCIONES SET PAZ_Y_SALVO = 1 WHERE id = ?");
-//        q.setParameters(id);
-//        q.executeUnique();
         return respuesta;    
+	}
+	
+	public long pazYSalvoConvencion(PersistenceManager pm,long idConv)
+	{
+		try{
+			
+			Query q = pm.newQuery(SQL, "UPDATE CONVENCIONES SET PAZ_Y_SALVO = 1 WHERE id = ?");
+			q.setParameters(idConv);
+			q.executeUnique();
+			return 1;
+		}
+		catch(Exception e){
+			return -1;
+		}
 	}
 	
 	public Convencion darConvencion(PersistenceManager pm, long id)
