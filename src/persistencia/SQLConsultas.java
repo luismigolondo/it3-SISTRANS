@@ -120,4 +120,22 @@ public class SQLConsultas {
 		return l;
 	}
 
+	public String rfc10(PersistenceManager pm, int servicioSeleccionado, String ascdesc) {
+		// TODO Auto-generated method stub
+		String lel = "SELECT c.ID AS CEDULA, COUNT(r.ID_SERVICIO) AS TOTAL_SERVICIOS"+" FROM CLIENTES c, RESERVAS_SERVICIOS r"+
+				" WHERE c.ID=r.ID_CLIENTE AND r.ID_SERVICIO!="+servicioSeleccionado+" AND r.HORA_APERTURA>'25/05/2019' AND r.HORA_CIERRE<'30/05/2019'GROUP by c.ID"
+				+ " ORDER BY TOTAL_SERVICIOS "+ascdesc;
+		Query q = pm.newQuery(SQL,lel);
+
+		List<Object> objects = q.executeList();
+		String r = "";
+		int i=1;
+		for(Object o: objects){
+			Object[] datos=(Object[])o;
+			r+=i+") EL cliente con id "+datos[0]+" consumio "+datos[1]+" servicios y ninguno era id 7. \n";
+			i++;
+		}
+		System.out.println("CARGARON");
+		return r;
+	}
 }

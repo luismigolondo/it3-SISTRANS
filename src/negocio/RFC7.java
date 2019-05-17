@@ -49,6 +49,5 @@ public class RFC7 {
 	public String toString() {
 		return "La cedula " + cedula + " ha consumido " + total_consumido;
 	}
-	
-	
+
 }
