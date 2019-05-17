@@ -756,7 +756,37 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		}
 	}
 	
-	public void rfc9(){
+	
+	
+	public void rfc10(){
+		String respuesta="";
+		String[] servicios = {"Piscina", "Gimnasio", "Internet", "Bar HardRock", "Subway", "Supermarket", "Souvenir", "SPA", "Lavado", "Prestamo Toalla"};
+		String[] sort = {"Ascendente", "Descendente"};
+		String servicio = (String) JOptionPane.showInputDialog(this, "RFC10 - Consulta Consumo", "Filtrar por todos menos servicio:", JOptionPane.QUESTION_MESSAGE, null, servicios, servicios[0]);
+		int servicioSeleccionado = 0;
+		int i = 0;
+		for(String s: servicios)
+		{
+			if(s.equals(servicio))
+			{
+				servicioSeleccionado = i + 1;
+				break;
+			}
+				i++;
+		}
+		String ascdesc = (String) JOptionPane.showInputDialog(this, "RFC10 - Consulta Consumo", "Ordenar por numero de reservas:", JOptionPane.QUESTION_MESSAGE, null, sort, sort[0]);
+		if(ascdesc.equals("Ascendente"))
+			ascdesc = "ASC";
+		else
+			ascdesc = "DESC";
+		
+		String b = hoteles.rfc10(servicioSeleccionado,ascdesc);
+		
+		panelDatos.actualizarInterfaz(b);
+		respuesta += "\n Operación terminada";
+	}
+	
+	public void rfc11(){
 		
 	}
 	
