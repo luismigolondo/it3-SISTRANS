@@ -11,6 +11,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import interfaz.RFC9;
 import negocio.RFC1;
 import negocio.RFC2;
 import negocio.RFC3;
@@ -38,12 +39,12 @@ public class SQLConsultas {
 	/* ****************************************************************
 	 * 			M�todos
 	 *****************************************************************/
-	
+
 	public SQLConsultas(PersistenciaCadenaHoteles p)
 	{
 		this.ph = p;
 	}
-	
+
 	public List<RFC1> rfc1(PersistenceManager pm, String fechaInicio, String fechaFin)
 	{
 		Query q = pm.newQuery(SQL, "SELECT g.ID_HABITACION, SUM(p.VALOR) "
@@ -53,7 +54,7 @@ public class SQLConsultas {
 		q.setParameters(fechaInicio, fechaFin);
 		return (List<RFC1>) q.executeList();
 	}
-	
+
 	public List<RFC2> rfc2(PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT g.ID_PRODUCTO, COUNT(*) "
@@ -63,7 +64,7 @@ public class SQLConsultas {
 		q.setResultClass(RFC2.class);
 		return (List<RFC2>) q.executeList();
 	}
-	
+
 	public List<RFC3> rfc3(PersistenceManager pm, String fechaInicio, String fechaFin)
 	{
 		Query q = pm.newQuery(SQL, "SELECT"
@@ -73,7 +74,7 @@ public class SQLConsultas {
 		q.setParameters(fechaInicio, fechaFin);
 		return (List<RFC3>) q.executeList();
 	}
-	
+
 	public List<Servicio> rfc4(PersistenceManager pm, long idServicio, long idHotel, String nombre, int horaA, int horaC, String tipo)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM SERVICIOS s "
@@ -81,7 +82,7 @@ public class SQLConsultas {
 		q.setResultClass(Servicio.class);
 		return (List<Servicio>) q.executeList();
 	}
-	
+
 	public List<RFC6> rfc6(PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT COUNT(ROUND(FECHA_DE_GASTO, 'DDD')) CONSUMIDO_X_VECES, ROUND(FECHA_DE_GASTO, 'DDD') GASTO_GENERADO_EL "
@@ -94,7 +95,7 @@ public class SQLConsultas {
 		q.setResultClass(RFC6.class);
 		return (List<RFC6>) q.executeList();
 	}
-	
+
 	public List<RFC7> rfc7(PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * "
@@ -102,9 +103,24 @@ public class SQLConsultas {
 				+ "FROM ((CLIENTES c INNER JOIN RESERVAS_HABITACIONES rH ON c.ID_RESERVA_HABITACION = rH.ID) "
 				+ "INNER JOIN GASTOS g ON g.ID_HABITACION = rH.ID_HABITACION) "
 				+ "INNER JOIN PRODUCTOS p ON p.ID = g.ID_PRODUCTO "
-				+ "GROUP BY c.ID ORDER BY TOTAL_CONSUMIDO DESC) WHERE TOTAL_CONSUMIDO >= 15000000;");
+				+ "GROUP BY c.ID ORDER BY TOTAL_CONSUMIDO DESC) WHERE TOTAL_CONSUMIDO >= 15000000");
 		q.setResultClass(RFC7.class);
 		return (List<RFC7>) q.executeList();
 	}
-	
+
+	public List<RFC9> rfc9(PersistenceManager pm, int servicioSeleccionado, String ascdesc, String inic, String fin) {
+		Query q = pm.newQuery(SQL, "SELECT c.ID AS CEDULA, COUNT(r.ID) as NUM_RESERVAS "
+				+ "FROM CLIENTES c INNER JOIN RESERVAS_SERVICIOS r ON c.ID = r.ID_CLIENTE "
+				+ "WHERE r.ID_SERVICIO ="+ servicioSeleccionado + 
+				" AND r.HORA_APERTURA >= '" + inic + "' "
+				+ "AND r.HORA_CIERRE <= '" + fin + "' "
+				+ "GROUP BY c.ID ORDER BY NUM_RESERVAS " + ascdesc);
+		q.setResultClass(RFC9.class);
+		long tiempoInic = System.currentTimeMillis();
+		List<RFC9> l = (List<RFC9>) q.executeList();
+		long tiempoFin = System.currentTimeMillis();
+		System.out.println("Tiempo de Consulta: " + (tiempoFin - tiempoInic)*0.001 + "s");
+		return l;
+	}
+
 }
