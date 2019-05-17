@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.DataBufferDouble;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -498,10 +499,16 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 					//					System.out.println(deudores[e]);
 					String[] simplif = deudores[e].split("DEBE PAGAR");
 					System.out.println(simplif[0]);
+					System.out.println(e+" EL PERRO NELLLL");
+					System.out.println(deudores[e].split("\\*")[0]+"[0]");
+					System.out.println(deudores[e].split("\\*")[1]+"[1]");
+					System.out.println(deudores[e].split("\\*")[2]+"[2]");
 					boolean pazYSalvo=false;
 					if(e!=deudores.length-1){
 						while(!pazYSalvo){	
-							Long idRH = Long.parseLong(deudores[e].split("*")[1]);
+							Long idRH = new Double(Double.parseDouble((deudores[e].split("\\*")[1]))).longValue();
+							System.out.println("EL IDDDDDD"+idRH);
+//							Long idRH = Long.parseLong(deudores[e].split("\\*")[1].split(".")[0]);
 							Long dinero = Long.parseLong(JOptionPane.showInputDialog (this, "El cliente "+simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
 							Double pm = dinero.doubleValue();
 							Double pm2 = 0.0;
@@ -525,9 +532,14 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 					}
 					else{
 						while(!pazYSalvo){
-							long dinero = Long.parseLong(JOptionPane.showInputDialog (this, simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
-							long idConv = Long.parseLong(simplif[0].split("*")[1]);
-							if(dinero>=Long.parseLong(simplif[1])){
+							Long dinero = Long.parseLong(JOptionPane.showInputDialog (this, simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
+							long idConv = Long.parseLong(simplif[0].split("\\*")[1]);
+//							String proces = simplif[1].split("E")[0]+"E+0"+ simplif[1].split("E")[1];
+//							System.out.println(proces+"PERRO LEON");
+//							BigDecimal test = new BigDecimal(proces) ;
+//							BigDecimal test1 = new BigDecimal(dinero);
+	
+							if(true){
 								JOptionPane.showMessageDialog(this, "PAZ Y SALVO!");
 								pazYSalvo=true;
 								//llamar metodo paz y salvo con
@@ -742,6 +754,10 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
+	}
+	
+	public void rfc9(){
+		
 	}
 	
 	/* ****************************************************************
