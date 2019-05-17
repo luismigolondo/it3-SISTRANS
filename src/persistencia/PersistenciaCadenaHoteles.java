@@ -169,13 +169,13 @@ public class PersistenciaCadenaHoteles {
         }
 	}
 	
-	public long eliminarConvencion(long id) {
+	public String eliminarConvencion(long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            long resp = sqlConvenciones.eliminarConvencion(pm, id);
+            String resp = sqlConvenciones.eliminarConvencion(pm, id);
             tx.commit();
             return resp;
         }
@@ -183,7 +183,7 @@ public class PersistenciaCadenaHoteles {
         {
 //        	e.printStackTrace();
         	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-            return -1;
+            return "No se pudo borrar la convencion";
         }
         finally
         {
@@ -458,6 +458,28 @@ public class PersistenciaCadenaHoteles {
 		}
 	}
 
+	public long pazYSalvoCliente(Long idRH) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long resp = sqlReservas_Habitaciones.pazYSalvoCliente(pm,idRH);
+			tx.commit();
+			return resp;
+		}
+		catch(Exception e)
+		{
+			log.error("Exception : "+e.getMessage()+ "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally{
+			if(tx.isActive())
+				tx.rollback();
+			pm.close();
+		}
+	}
+	
 	public long RF9registrarLlegadaCliente(long pIdReserva) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -537,13 +559,14 @@ public class PersistenciaCadenaHoteles {
 	
 	}
 	
-	public String RF12reservarHabServs(long id,long idConvencion, long idHotel, String habs, String servs)
+	public String RF12reservarHabServs(long idConvencion, long idHotel, String habs, String servs)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			String resp = sqlReservas_Convencion.registrarHabsServs(pm,id,idConvencion, idHotel, habs,servs);
+			long idx = nextval();
+			String resp = sqlReservas_Convencion.registrarHabsServs(pm,idx,idConvencion, idHotel, habs,servs);
 			tx.commit();
 			return resp;
 		}
@@ -559,13 +582,13 @@ public class PersistenciaCadenaHoteles {
 		}
 	}
 	
-	public String RF13cancelarReservasConvencion(long idHotel, long idConvencion, String habs, String servs)
+	public String RF13cancelarReservasConvencion(long idConvencion, String habs, String servs)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			String resp = sqlReservas_Convencion.eliminarReservas(pm,idConvencion, idHotel, habs,servs);
+			String resp = sqlReservas_Convencion.eliminarReservas(pm,idConvencion, habs,servs);
 			tx.commit();
 			return resp;
 		}
@@ -581,9 +604,49 @@ public class PersistenciaCadenaHoteles {
 		}
 	}
 	
-	public long RF14registrarFinConvencion()
+	public String RF14registrarFinConvencion(long id)
 	{
-		return 0;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			String resp = sqlConvenciones.eliminarConvencion(pm, id);
+			tx.commit();
+			return resp;
+		}
+		catch(Exception e)
+		{
+			log.error("Exception : "+e.getMessage()+ "\n" + darDetalleException(e));
+			return ""+-1;
+		}
+		finally{
+			if(tx.isActive())
+				tx.rollback();
+			pm.close();
+		}
+		
+	}
+	
+	public long pazYSalvoConvencion(long IdConv)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long resp = sqlConvenciones.pazYSalvoConvencion(pm, IdConv);
+			tx.commit();
+			return resp;
+		}
+		catch(Exception e)
+		{
+			log.error("Exception : "+e.getMessage()+ "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally{
+			if(tx.isActive())
+				tx.rollback();
+			pm.close();
+		}
 	}
 	
 	public String RF15registrarEntradaMantenimiento(long id, long idHotel, String habs, String servs, String fechaIni, String fechaFin)
@@ -757,5 +820,9 @@ public class PersistenciaCadenaHoteles {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		return sqlConsultas.rfc7(pm);
 	}
+
+	
+
+	
 	
 }

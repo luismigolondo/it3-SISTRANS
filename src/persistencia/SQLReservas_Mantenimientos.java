@@ -28,18 +28,28 @@ public class SQLReservas_Mantenimientos {
 	}
 	
 	public String registrarFinMantenimiento(PersistenceManager pm, long idHotel, String habs, String servs) {
-		String[] habitaciones = habs.split(",");
-		for(int e=0; e<habitaciones.length;e++) {
-			Query q = pm.newQuery(SQL,"UPDATE "+ "RESERVAS_MANTENIMIENTOS" + " SET EN_MANTENIMIENTO = ? WHERE ID_HABITACION="
-					+habitaciones[e]);
-			q.setParameters(0);
+		String[]  habitaciones = {habs};
+		if(habs.length()!=1){
+			habitaciones = habs.split(",");
 		}
-		String[] serviciones = servs.split(",");
-		for(int e=0; e<serviciones.length;e++) {
-			Query q = pm.newQuery(SQL,"UPDATE "+ "RESERVAS_MANTENIMIENTOS" + " SET EN_MANTENIMIENTO = ? WHERE ID_SERVICIO="
-					+serviciones[e]);
-			q.setParameters(0);
-		}
+
+//		for(int e=0; e<habitaciones.length;e++) {
+//			Query q = pm.newQuery(SQL,"UPDATE "+ "RESERVAS_MANTENIMIENTOS" + " SET EN_MANTENIMIENTO = ? WHERE ID_HABITACION="
+//					+habitaciones[e]);
+//			q.setParameters(0);
+//			q.executeUnique();
+//		}
+//		
+//		String[] serviciones = {servs};
+//		if(servs.length()!=1){
+//			serviciones = servs.split(",");
+//		}
+//		for(int e=0; e<serviciones.length;e++) {
+//			Query q = pm.newQuery(SQL,"UPDATE "+ "RESERVAS_MANTENIMIENTOS" + " SET EN_MANTENIMIENTO = ? WHERE ID_SERVICIO="
+//					+serviciones[e]);
+//			q.setParameters(0);
+//			q.executeUnique();
+//		}
 		return "HABITACIONES EN MANTENIMIENTO: "+habs+" SERVICIOS EN MANTENIMIENTO: "+servs;
 	}
 }
