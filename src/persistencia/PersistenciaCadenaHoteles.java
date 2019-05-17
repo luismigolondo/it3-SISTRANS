@@ -616,6 +616,7 @@ public class PersistenciaCadenaHoteles {
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			log.error("Exception : "+e.getMessage()+ "\n" + darDetalleException(e));
 			return ""+-1;
 		}

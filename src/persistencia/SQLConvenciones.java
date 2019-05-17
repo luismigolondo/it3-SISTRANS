@@ -53,7 +53,6 @@ public class SQLConvenciones {
 					+" ORDER BY c.ID_RESERVA_HABITACION ";
 			
 			Query q = pm.newQuery(SQL,lel);
-			
 			List<Object> objects = q.executeList();
 			String autorAct = "-";
 			Double tot = 0.0;
