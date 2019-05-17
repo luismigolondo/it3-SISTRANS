@@ -500,7 +500,8 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 					System.out.println(simplif[0]);
 					boolean pazYSalvo=false;
 					if(e!=deudores.length-1){
-						while(!pazYSalvo){						
+						while(!pazYSalvo){	
+							Long idRH = Long.parseLong(deudores[e].split("*")[1]);
 							Long dinero = Long.parseLong(JOptionPane.showInputDialog (this, "El cliente "+simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
 							Double pm = dinero.doubleValue();
 							Double pm2 = 0.0;
@@ -514,6 +515,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 								JOptionPane.showMessageDialog(this, "PAZ Y SALVO!");
 								pazYSalvo=true;
 								//llamar metodo paz y salvo cliente
+								hoteles.pazYSalvoCliente(idRH);
 							}
 							else{
 								JOptionPane.showMessageDialog(this, "El dinero ingresado no cubre la deuda, debe ingresar al menos "+simplif[1]);
@@ -524,10 +526,12 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 					else{
 						while(!pazYSalvo){
 							long dinero = Long.parseLong(JOptionPane.showInputDialog (this, simplif[0]+" debe pagar "+simplif[1], "", JOptionPane.QUESTION_MESSAGE));
+							long idConv = Long.parseLong(simplif[0].split("*")[1]);
 							if(dinero>=Long.parseLong(simplif[1])){
 								JOptionPane.showMessageDialog(this, "PAZ Y SALVO!");
 								pazYSalvo=true;
-								//llamar metodo paz y salvo conv 
+								//llamar metodo paz y salvo con
+								hoteles.pazYSalvoConvencion(idConv);
 							}
 							else{
 								JOptionPane.showMessageDialog(this, "El dinero ingresado no cubre la deuda, debe ingresar al menos "+simplif[1]);
