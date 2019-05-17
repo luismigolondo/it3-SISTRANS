@@ -116,10 +116,7 @@ public class SQLConsultas {
 				+ "AND r.HORA_CIERRE <= '" + fin + "' "
 				+ "GROUP BY c.ID ORDER BY NUM_RESERVAS " + ascdesc);
 		q.setResultClass(RFC9.class);
-		long tiempoInic = System.currentTimeMillis();
 		List<RFC9> l = (List<RFC9>) q.executeList();
-		long tiempoFin = System.currentTimeMillis();
-		System.out.println("Tiempo de Consulta: " + (tiempoFin - tiempoInic)*0.001 + "s");
 		return l;
 	}
 
