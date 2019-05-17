@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 import com.google.gson.JsonObject;
 
-import interfaz.RFC9;
 import persistencia.PersistenciaCadenaHoteles;
 
 /**

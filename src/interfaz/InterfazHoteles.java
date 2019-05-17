@@ -45,6 +45,7 @@ import negocio.RFC3;
 import negocio.RFC4;
 import negocio.RFC6;
 import negocio.RFC7;
+import negocio.RFC9;
 import negocio.ReservaHabitacion.TIPOS_DE_RESERVA;
 import negocio.Servicio;
 import negocio.VOCliente;

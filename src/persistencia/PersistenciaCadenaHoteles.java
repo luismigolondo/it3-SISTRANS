@@ -15,7 +15,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import interfaz.RFC9;
 import negocio.Cliente;
 import negocio.Convencion;
 import negocio.Gasto;
@@ -26,6 +25,7 @@ import negocio.RFC2;
 import negocio.RFC3;
 import negocio.RFC6;
 import negocio.RFC7;
+import negocio.RFC9;
 import negocio.ReservaHabitacion;
 import negocio.ReservaServicio;
 import negocio.Servicio;
