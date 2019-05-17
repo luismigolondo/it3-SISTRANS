@@ -1,7 +1,7 @@
 /**
  * 
  */
-package interfaz;
+package negocio;
 
 /**
  * @author lm.gomezl
