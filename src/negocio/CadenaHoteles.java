@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import com.google.gson.JsonObject;
 
+import interfaz.RFC9;
 import persistencia.PersistenciaCadenaHoteles;
 
 /**
@@ -21,11 +22,11 @@ public class CadenaHoteles {
 	private static Logger log = Logger.getLogger(Hotel.class.getName());
 
 	private PersistenciaCadenaHoteles persistencia;
-	
+
 	/* ****************************************************************
 	 * 			M�todos para manejar las CONVENCIONES
 	 *****************************************************************/
-	
+
 	public Convencion adicionarConvencion(String fIni, String fFin, long idHotel, long pIdConvencion)
 	{
 		log.info("Adicionando convencion: ");
@@ -41,7 +42,7 @@ public class CadenaHoteles {
 		log.info("Se aelimino convencion: ");
 		return convencion;
 	}
-	
+
 	public Convencion darConvencion(long id)
 	{
 		log.info("Obteniendo convencion: ");
@@ -61,13 +62,13 @@ public class CadenaHoteles {
 	public void cerrarPersistencia() {
 		persistencia.cerrarPersistencia();
 	}
-	
+
 	public long pazYSalvoCliente(Long idRH) {
 		log.info("Registrando paz y salvo cliente: " );
 		long checkout = persistencia.pazYSalvoCliente(idRH);
 		log.info("Se realiz� el registro de paz y salvo de cliente...");
 		return checkout;
-		
+
 	}
 
 	//RF7
@@ -98,7 +99,7 @@ public class CadenaHoteles {
 		log.info("La reserva: " + registrar + " fue activada.");
 		return registrar;
 	}
-	
+
 	//RF10
 	public Gasto registrarConsumoServicio(long idHabitacion, long idProducto, String pFecha)
 	{
@@ -107,7 +108,7 @@ public class CadenaHoteles {
 		log.info("Se agrego el producto " + idProducto + " a la cuenta de la habitación "+idHabitacion);
 		return gasto;
 	}
-	
+
 	//RF11
 	public long registrarSalidaCliente(long pIdReserva)
 	{
@@ -142,7 +143,7 @@ public class CadenaHoteles {
 		log.info("Se realiz� el fin de la convencion");
 		return checkout;
 	}
-	
+
 	public long pazYSalvoConvencion(long IdConv)
 	{
 		log.info("Registrando paz y salvo convencion: " );
@@ -176,24 +177,24 @@ public class CadenaHoteles {
 	 */
 	public Cliente darClientePorId (long idCliente)
 	{
-        log.info ("Dar información de un cliente por id: " + idCliente);
-        Cliente cliente = persistencia.darCLientePorId(idCliente);
-        log.info ("Buscando cliente por Id: " + idCliente != null ? idCliente  + "": "NO EXISTE");
-        return cliente;
+		log.info ("Dar información de un cliente por id: " + idCliente);
+		Cliente cliente = persistencia.darCLientePorId(idCliente);
+		log.info ("Buscando cliente por Id: " + idCliente != null ? idCliente  + "": "NO EXISTE");
+		return cliente;
 	}
-	
+
 	public long[] limpiarHoteles() {
 		log.info ("Limpiando la BD de Cadena de Hoteles");
-        long [] borrrados = persistencia.limpiarParranderos();	
-        log.info ("Limpiando la BD de Hoteles: Listo!");
-        return borrrados;
+		long [] borrrados = persistencia.limpiarParranderos();	
+		log.info ("Limpiando la BD de Hoteles: Listo!");
+		return borrrados;
 	}
 	public VOCliente adicionarCliente(long idHotel, long idCliente, long tipoId, long idHabitacion, long idServicio, String nombreUsuario,
 			String correoUsuario) {
 		log.info ("Adicionando cliente: " + nombreUsuario);
-        Cliente bebedor = persistencia.adicionarCliente(idHotel, idCliente, tipoId, idHabitacion, idServicio, nombreUsuario, correoUsuario);
-        log.info ("Adicionando cliente: " + nombreUsuario);
-        return bebedor;
+		Cliente bebedor = persistencia.adicionarCliente(idHotel, idCliente, tipoId, idHabitacion, idServicio, nombreUsuario, correoUsuario);
+		log.info ("Adicionando cliente: " + nombreUsuario);
+		return bebedor;
 	}
 
 	public List<RFC1> rfc1(String fechaInicio, String fechaFin) {
@@ -206,14 +207,14 @@ public class CadenaHoteles {
 		log.info("Generando " + lista.size() + " ganancias de habitaciones");
 		return lista;
 	}
-	
+
 	public List<RFC2> rfc2() {
 		log.info("Generando consulta RFC2");
 		List<RFC2> lista = new LinkedList<RFC2>(persistencia.rfc2());
 		log.info("Generando " + lista.size() + " servicios mas populares");
 		return lista;
 	}
-	
+
 	public List<RFC3> rfc3(String fechaInicio, String fechaFin) {
 		log.info("Generando consulta RFC3");
 		List<RFC3> lista = new LinkedList<RFC3>();
@@ -224,7 +225,7 @@ public class CadenaHoteles {
 		log.info("Generando " + lista.size() + " indices de ocupacion habitaciones");
 		return lista;
 	}
-	
+
 	public List<Servicio> rfc4(long idServicio, long idHotel, String nombre, int horaA, int horaC, String tipo)
 	{
 		log.info("Generando consulta RFC4");
@@ -237,7 +238,7 @@ public class CadenaHoteles {
 		log.info("Generando " + lista.size() + " servicios con caracteristica " + tipo);
 		return lista;
 	}
-	
+
 	public List<RFC6> rfc6() {
 		log.info("Generando consulta RFC6");
 		List<RFC6> lista = new LinkedList<RFC6>();
@@ -248,7 +249,7 @@ public class CadenaHoteles {
 		log.info("Generando " + lista.size() + " analisis de operacion");
 		return lista;
 	}
-	
+
 	public List<RFC7> rfc7() {
 		log.info("Generando consulta RFC7");
 		List<RFC7> lista = new LinkedList<RFC7>();
@@ -260,14 +261,26 @@ public class CadenaHoteles {
 		return lista;
 	}
 
+	public List<RFC9> rfc9(int servicioSeleccionado, String ascdesc, String inic, String fin) {
+		log.info("Generando consulta RFC9");
+		List<RFC9> lista = new LinkedList<RFC9>();
+		List<RFC9> l = persistencia.rfc9(servicioSeleccionado, ascdesc, inic, fin);
+		for (RFC9 r : l)
+		{
+			lista.add(r);
+		}
+		log.info("Generando " + lista.size() + " consumo de clientes");
+		return lista;
+	}
+
 	public String rfc10(int servicioSeleccionado, String ascdesc) {
 		// TODO Auto-generated method stub
 		log.info ("Realizando consulta...: ");
-        String bebedor = persistencia.rfc10(servicioSeleccionado,ascdesc);
-        log.info ("Procesando informacion obtenida....");
-        return bebedor;
+		String bebedor = persistencia.rfc10(servicioSeleccionado,ascdesc);
+		log.info ("Procesando informacion obtenida....");
+		return bebedor;
 	}
 
-	
-
 }
+
+

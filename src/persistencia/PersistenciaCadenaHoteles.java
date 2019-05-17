@@ -15,6 +15,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import interfaz.RFC9;
 import negocio.Cliente;
 import negocio.Convencion;
 import negocio.Gasto;
@@ -64,7 +65,7 @@ public class PersistenciaCadenaHoteles {
 	private SQLUtil sqlUtil = new SQLUtil(this);
 
 	private SQLClientes sqlClientes;
-	
+
 	private SQLConvenciones sqlConvenciones;
 
 	private SQLEmpleados sqlEmpleados;
@@ -78,15 +79,15 @@ public class PersistenciaCadenaHoteles {
 	private SQLPlanes_De_Consumo sqlPlanes_De_Consumo;
 
 	private SQLProductos sqlProductos;
-	
+
 	private SQLReservas_Convencion sqlReservas_Convencion;
 
 	private SQLReservas_Habitaciones sqlReservas_Habitaciones;
-	
+
 	private SQLReservas_Mantenimientos sqlReservas_Mantenimientos;
 
 	private SQLReservas_Servicios sqlReservas_Servicios;
-	
+
 	private SQLServicios sqlServicios;
 
 	private SQLTipo_Identificacion sqlTipo_Identificacion;
@@ -96,7 +97,7 @@ public class PersistenciaCadenaHoteles {
 	private SQLTipo_Reserva__Habitacion sqlTipo_Reserva_Habitacion;
 
 	private SQLTipo_Rol sqlTipo_Rol;
-	
+
 	private SQLConsultas sqlConsultas;
 
 	private PersistenciaCadenaHoteles(){
@@ -133,73 +134,73 @@ public class PersistenciaCadenaHoteles {
 		log.trace ("Se esta accediendo a la persistencia: " + unidadPersistencia);
 		pmf = JDOHelper.getPersistenceManagerFactory(unidadPersistencia);		
 	}
-	
+
 
 	/* ****************************************************************
 	 * 			M�todos para manejar las CONVENCIONES
 	 *****************************************************************/
-	
+
 	public Convencion adicionarConvencion(String fIni, String fFin, long idHotel, long pIdConvencion)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long tuplasInsertadas = sqlConvenciones.adicionarConvencion(pm, pIdConvencion,fIni,fFin,idHotel);
-            tx.commit();
-            
-            log.trace ("Inserci�n de convencion " + ": " + tuplasInsertadas + " tuplas insertadas");
-            
-            return new Convencion(pIdConvencion,fIni,fFin,idHotel);
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-        	return null;
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long tuplasInsertadas = sqlConvenciones.adicionarConvencion(pm, pIdConvencion,fIni,fFin,idHotel);
+			tx.commit();
+
+			log.trace ("Inserci�n de convencion " + ": " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Convencion(pIdConvencion,fIni,fFin,idHotel);
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
-	
+
 	public String eliminarConvencion(long id) {
 		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            String resp = sqlConvenciones.eliminarConvencion(pm, id);
-            tx.commit();
-            return resp;
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-            return "No se pudo borrar la convencion";
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			String resp = sqlConvenciones.eliminarConvencion(pm, id);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return "No se pudo borrar la convencion";
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
-	
+
 	public Convencion darConvencion(long id)
 	{
 		return sqlConvenciones.darConvencion (pmf.getPersistenceManager(), id);
 	}
-	
+
 	public List<Convencion> darConvenciones()
 	{
 		return sqlConvenciones.darConvenciones((pmf.getPersistenceManager()));
@@ -278,7 +279,7 @@ public class PersistenciaCadenaHoteles {
 	{
 		return tablas.get(2);
 	}
-	
+
 	public String darTablaEmpleados()
 	{
 		return tablas.get(3);
@@ -308,7 +309,7 @@ public class PersistenciaCadenaHoteles {
 	{
 		return tablas.get(8);
 	}
-	
+
 	public String darTablaReservaConvencion()
 	{
 		return tablas.get(9);
@@ -318,7 +319,7 @@ public class PersistenciaCadenaHoteles {
 	{
 		return tablas.get(10);
 	}
-	
+
 	public String darTablaReservasMantenimientos()
 	{
 		return tablas.get(11);
@@ -382,7 +383,7 @@ public class PersistenciaCadenaHoteles {
 		}
 		return resp;
 	}
-	
+
 	/**
 	 * FR7 REGISTRAR UNA RESERVA DE ALOJAMIENTO
 	 *Reserva una habitación por un período de tiempo, por parte de un cliente, siempre y cuando esté disponible.
@@ -422,10 +423,10 @@ public class PersistenciaCadenaHoteles {
 			{
 				tx.rollback();
 			}
-		  	pm.close();
+			pm.close();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -439,7 +440,7 @@ public class PersistenciaCadenaHoteles {
 			tx.begin();
 			long tupla = sqlReservas_Servicios.adicionarReserva(pmf.getPersistenceManager(), id, horaInicio, horaFin, pIdCliente, pIdTipoId, servicio);
 			tx.commit();
-			
+
 			log.trace("Insercion reserva servicio: " + id + ": " + tupla + " tuplas insertadas" );
 			long [] cliente = new long [] {pIdCliente, pIdTipoId};
 			return new ReservaServicio(id, horaInicio, horaFin, cliente, servicio);
@@ -454,7 +455,7 @@ public class PersistenciaCadenaHoteles {
 			{
 				tx.rollback();
 			}
-		  	pm.close();
+			pm.close();
 		}
 	}
 
@@ -479,7 +480,7 @@ public class PersistenciaCadenaHoteles {
 			pm.close();
 		}
 	}
-	
+
 	public long RF9registrarLlegadaCliente(long pIdReserva) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -501,40 +502,40 @@ public class PersistenciaCadenaHoteles {
 			pm.close();
 		}
 	}
-	
+
 	//servicio, nosotros manejamos lo que ofrecen los servicios como productos.
 	public Gasto RF10registrarConsumoServicio(long idHabitacion, long idProducto, String pFecha)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try{
-        	tx.begin();
-        	//ME DI CUENTA QUE EN NEGOCIO, GASTO NO TENIA ID
-        	//LO AGREGUE ATT JUAN DAVID
-        	//PARA ITERACION 2
-        	long idGasto = nextval();
+		Transaction tx=pm.currentTransaction();
+		try{
+			tx.begin();
+			//ME DI CUENTA QUE EN NEGOCIO, GASTO NO TENIA ID
+			//LO AGREGUE ATT JUAN DAVID
+			//PARA ITERACION 2
+			long idGasto = nextval();
 			long tupla = sqlGastos.registrarConsumoServicio(pm,idGasto,idHabitacion,idProducto, pFecha);
-        	tx.commit();
-        	
-        	return new Gasto(idGasto,idHabitacion, idProducto);
-        }
-        catch(Exception e)
-        {
-        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-        	return null;
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
-		
+			tx.commit();
+
+			return new Gasto(idGasto,idHabitacion, idProducto);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
 	}
-	
+
 	public long RF11registrarSalidaCliente(long idReserva)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -556,9 +557,9 @@ public class PersistenciaCadenaHoteles {
 				tx.rollback();
 			pm.close();
 		}
-	
+
 	}
-	
+
 	public String RF12reservarHabServs(long idConvencion, long idHotel, String habs, String servs)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -581,7 +582,7 @@ public class PersistenciaCadenaHoteles {
 			pm.close();
 		}
 	}
-	
+
 	public String RF13cancelarReservasConvencion(long idConvencion, String habs, String servs)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -603,7 +604,7 @@ public class PersistenciaCadenaHoteles {
 			pm.close();
 		}
 	}
-	
+
 	public String RF14registrarFinConvencion(long id)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -625,9 +626,9 @@ public class PersistenciaCadenaHoteles {
 				tx.rollback();
 			pm.close();
 		}
-		
+
 	}
-	
+
 	public long pazYSalvoConvencion(long IdConv)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -649,7 +650,7 @@ public class PersistenciaCadenaHoteles {
 			pm.close();
 		}
 	}
-	
+
 	public String RF15registrarEntradaMantenimiento(long id, long idHotel, String habs, String servs, String fechaIni, String fechaFin)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -671,7 +672,7 @@ public class PersistenciaCadenaHoteles {
 			pm.close();
 		}
 	}
-	
+
 	public String RF16registrarFinMantenimiento(long idHotel, String habs, String servs)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -693,7 +694,7 @@ public class PersistenciaCadenaHoteles {
 			pm.close();
 		}
 	}
-	
+
 
 	public long[] limpiarParranderos() {
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -709,7 +710,7 @@ public class PersistenciaCadenaHoteles {
 		catch(Exception e)
 		{
 			log.error("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-        	return new long[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+			return new long[] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 		}
 		finally
 		{
@@ -741,7 +742,7 @@ public class PersistenciaCadenaHoteles {
 			long tupla = sqlClientes.adicionarCliente(pmf.getPersistenceManager(), idCliente, tipoId, idHotel, 
 					idHabitacion, idServicio, nombreUsuario, correoUsuario);
 			tx.commit();
-			
+
 			log.trace("Insercion de cliente: " + nombreUsuario + " : " + tupla + "tuplas insertadas");
 			return new Cliente(new long[] {idCliente, tipoId}, nombreUsuario, correoUsuario, null, idHotel, null);
 		}
@@ -749,44 +750,44 @@ public class PersistenciaCadenaHoteles {
 		{
 			e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-        	return null;
+			return null;
 		}
 		finally
 		{
 			if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
+			{
+				tx.rollback();
+			}
+			pm.close();
 		}
-		
+
 	}
 
 	public long cambiarReservaServicioCliente(long idCliente, long idSerivcio)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long resp = sqlClientes.cambiarReservaClietne(pm, idCliente, idSerivcio);
-            tx.commit();
-            return resp;
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-            return -1;
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlClientes.cambiarReservaClietne(pm, idCliente, idSerivcio);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
 
 	public List<RFC1> rfc1(String fechaInicio, String fechaFin) {
@@ -798,28 +799,33 @@ public class PersistenciaCadenaHoteles {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		return sqlConsultas.rfc2(pm);
 	}
-	
+
 	public List<RFC3> rfc3(String fechaInicio, String fechaFin) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		return sqlConsultas.rfc3(pm, fechaInicio, fechaFin);
 	}
-	
+
 	public List<Servicio> rfc4(long idServicio, long idHotel, String nombre, int horaA, int horaC, String tipo)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		return sqlConsultas.rfc4(pm, idServicio, idHotel, nombre, horaA, horaC, tipo);
 	}
-	
+
 	public List<RFC6> rfc6()
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		return sqlConsultas.rfc6(pm);
 	}
-	
+
 	public List<RFC7> rfc7()
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		return sqlConsultas.rfc7(pm);
+	}
+
+	public List<RFC9> rfc9(int servicioSeleccionado, String ascdesc, String inic, String fin) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		return sqlConsultas.rfc9(pm, servicioSeleccionado, ascdesc, inic, fin);
 	}
 
 	public String rfc10(int servicioSeleccionado, String ascdesc) {
@@ -828,8 +834,9 @@ public class PersistenciaCadenaHoteles {
 		return sqlConsultas.rfc10(pm, servicioSeleccionado,ascdesc);
 	}
 
-	
 
-	
-	
+
+
+
+
 }
