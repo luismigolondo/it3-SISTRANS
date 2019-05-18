@@ -784,7 +784,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 
 			List<RFC9> lista = hoteles.rfc9(servicioSeleccionado, ascdesc, inic, fin);
 
-			String resultado = "Requerimiento funcional de consulta 7: \n";
+			String resultado = "Requerimiento funcional de consulta 9: \n";
 			int j = 1;
 			for(RFC9 r : lista)
 			{
