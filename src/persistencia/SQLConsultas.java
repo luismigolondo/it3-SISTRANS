@@ -115,25 +115,24 @@ public class SQLConsultas {
 				+ "WHERE r.ID_SERVICIO ="+ servicioSeleccionado + 
 				" AND r.HORA_APERTURA >= '" + inic + "' "
 				+ "AND r.HORA_CIERRE <= '" + fin + "' "
-				+ "GROUP BY c.ID ORDER BY NUM_RESERVAS " + ascdesc);
+				+ " AND ROWNUM<126 GROUP BY c.ID ORDER BY NUM_RESERVAS " + ascdesc);
 		q.setResultClass(RFC9.class);
 		List<RFC9> l = (List<RFC9>) q.executeList();
+		System.out.println("EL PELUDO");
 		return l;
 	}
 
 	public String rfc10(PersistenceManager pm, int servicioSeleccionado, String ascdesc,String inic, String fin) {
 		// TODO Auto-generated method stub
-		String lel = "SELECT c.ID AS CEDULA, COUNT(r.ID_SERVICIO) AS TOTAL_SERVICIOS"+" FROM CLIENTES c, RESERVAS_SERVICIOS r"+
-				" WHERE c.ID=r.ID_CLIENTE AND r.ID_SERVICIO!="+servicioSeleccionado+" AND r.HORA_APERTURA>'"+inic+"' AND r.HORA_CIERRE<'"+fin+"'GROUP by c.ID"
-				+ " ORDER BY TOTAL_SERVICIOS "+ascdesc;
+		String lel = "select id  from clientes where ID not in (SELECT c.ID FROM CLIENTES c INNER JOIN RESERVAS_SERVICIOS r ON c.ID = r.ID_CLIENTE"
+				+ " WHERE r.ID_SERVICIO =7 AND r.HORA_APERTURA >= '25/05/2018' AND r.HORA_CIERRE <= '28/05/2019') AND ROWNUM<126 GROUP BY ID";
 		Query q = pm.newQuery(SQL,lel);
 
 		List<Object> objects = q.executeList();
 		String r = "";
 		int i=1;
 		for(Object o: objects){
-			Object[] datos=(Object[])o;
-			r+=i+") EL cliente con id "+datos[0]+" consumio "+datos[1]+" servicios y ninguno era id 7. \n";
+			r+=i+") EL cliente con id "+o.toString()+" nunca consumio el servicio con id 7. \n";
 			i++;
 		}
 		System.out.println("CARGARON");
@@ -152,17 +151,19 @@ public class SQLConsultas {
 	
 	public String rfc12(PersistenceManager pm) {
 		// TODO Auto-generated method stub
-		String sentencia = "SELECT c.NOMBRE,c.ID, COUNT(r.ID) AS SERVICIOS_CONSUMIDOS FROM CLIENTES c, RESERVAS_HABITACIONES r, GASTOS g, PRODUCTOS p WHERE c.ID=r.ID_CLIENTE AND g.ID_RESERVA_HABITACION=r.ID AND g.ID_PRODUCTO=p.ID "
-				+ "AND ((r.CHECKED_IN=1 AND r.CHECKED_OUT=1) OR (p.VALOR>300000) OR "
-				+ " (p.ID_SERVICIO=8 OR p.ID_SERVICIO=11)) GROUP BY c.ID order by COUNT(r.ID) DESC";
+		String sentencia = "SELECT c.NOMBRE,c.ID, COUNT(r.ID) AS SERVICIOS_CONSUMIDOS FROM CLIENTES c, RESERVAS_HABITACIONES r, GASTOS g, PRODUCTOS p "
+				+ "WHERE c.ID=r.ID_CLIENTE AND g.ID_RESERVA_HABITACION=r.ID AND g.ID_PRODUCTO=p.ID "
+				+ "AND ((r.CHECKED_IN=1 AND r.CHECKED_OUT=1) OR (p.VALOR>300000) OR  (p.ID_SERVICIO=8 OR p.ID_SERVICIO=11)) "
+				+ " AND ROWNUM<126 GROUP BY c.NOMBRE,c.ID order by COUNT(r.ID) DESC";
 		Query q = pm.newQuery(SQL,sentencia);
 		List<Object> objects = q.executeList();
 		String r = "";
 		int i=1;
 		for(Object o: objects){
+			System.out.println("CHOLEEEE"+i);
 			Object[] datos=(Object[])o;
 			//Dependiendo del atributo que se este seleccionando en el SELECT se hara el acceso al arreglo datos
-			r+=i+") " +datos[0]+" CON ID "+ datos[1]+"ES UN BUEN CLIENTE Y CONSUMIO "+ datos[2]+" VECES\n";
+			r+=i+") " +datos[0]+" CON ID "+ datos[1]+" ES UN BUEN CLIENTE Y CONSUMIO "+ datos[2]+" VECES\n";
 			i++;
 		}
 		return r;

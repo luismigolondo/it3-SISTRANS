@@ -826,6 +826,7 @@ public class PersistenciaCadenaHoteles {
 
 	public List<RFC9> rfc9(int servicioSeleccionado, String ascdesc, String inic, String fin) {
 		PersistenceManager pm = pmf.getPersistenceManager();
+		System.out.println("FULLETEADOS");
 		return sqlConsultas.rfc9(pm, servicioSeleccionado, ascdesc, inic, fin);
 	}
 

@@ -789,6 +789,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	public void rfc9(){
 		try
 		{
+			System.out.println("empezamoooskdoaskodkaos--------");
 			String[] servicios = {"Piscina", "Gimnasio", "Internet", "Bar HardRock", "Subway", "Supermarket", "Souvenir", "SPA", "Lavado", "Prestamo Toalla"};
 			String[] sort = {"Ascendente", "Descendente"};
 			String servicio = (String) JOptionPane.showInputDialog(this, "RFC9 - Consulta Consumo", "Filtrar por servicio:", JOptionPane.QUESTION_MESSAGE, null, servicios, servicios[0]);
@@ -812,7 +813,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			String fin = JOptionPane.showInputDialog (this, "Ingrese la fecha de rango final DD/MM/AAAA", "RFC9 - Consulta Consumo", JOptionPane.QUESTION_MESSAGE);
 
 			List<RFC9> lista = hoteles.rfc9(servicioSeleccionado, ascdesc, inic, fin);
-
+			System.out.println("S30H------------------------");
 			String resultado = "Requerimiento funcional de consulta 9: \n";
 			int j = 1;
 			for(RFC9 r : lista)
@@ -888,18 +889,29 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		while(!secure){
 			secure=loginGG();
 		}
-		if(secure){
-		JOptionPane.showMessageDialog (this, "BIENVENIDO, GERENTE GENERAL", "GG", JOptionPane.QUESTION_MESSAGE);
-		String b = hoteles.rfc12();
+		try{
+			String resultado="";
+			if(secure){
+				JOptionPane.showMessageDialog (this, "BIENVENIDO, GERENTE GENERAL", "GG", JOptionPane.QUESTION_MESSAGE);
+				String b = hoteles.rfc12();
+				panelDatos.actualizarInterfaz(resultado);
+				resultado+=b;
+				resultado += "\n Operaci�n terminada";
+				panelDatos.actualizarInterfaz(resultado);
+				System.out.println("CHOLE CHO?");
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 
-	/* ****************************************************************
-	 * 			M�todos administrativos
-	 *****************************************************************/
-	/**
-	 * Muestra el log de Hoteles
-	 */
+		/* ****************************************************************
+		 * 			M�todos administrativos
+		 *****************************************************************/
+		/**
+		 * Muestra el log de Hoteles
+		 */
 	public void mostrarLogHoteles ()
 	{
 		mostrarArchivo ("cadenahoteles.log");
