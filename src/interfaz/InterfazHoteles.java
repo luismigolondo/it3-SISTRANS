@@ -40,6 +40,7 @@ import negocio.Convencion;
 import negocio.Gasto;
 import negocio.Hotel;
 import negocio.RFC1;
+import negocio.RFC10;
 import negocio.RFC2;
 import negocio.RFC3;
 import negocio.RFC4;
@@ -662,7 +663,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -683,7 +684,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -706,7 +707,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -734,7 +735,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -755,7 +756,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -776,7 +777,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -818,7 +819,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += j++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 
 		}
 		catch (Exception e) {
@@ -853,11 +854,28 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		String b = hoteles.rfc10(servicioSeleccionado,ascdesc);
 
 		panelDatos.actualizarInterfaz(b);
-		respuesta += "\n Operación terminada";
+		respuesta += "\n Operaciï¿½n terminada";
 	}
 
 	public void rfc11(){
+		try
+		{
+			List<RFC10> lista = hoteles.rfc10();
 
+			String resultado = "Requerimiento funcional de consulta 10: \n";
+			resultado += "SEMANA - ID SERVICIO MAX - MAXIMO - ID SERVICIO MIN - MINIMO - ID HABITACION MAX - MAXIMO- ID HABITACION MIN - MINIMO";
+			int i = 1;
+			for(RFC10 r : lista)
+			{
+				resultado += i++ + ". " + r.toString() + "\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operaciï¿½n terminada";
+		}
+		catch (Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
 	}
 	
 	public void rfc12(){

@@ -279,6 +279,10 @@ public class CadenaHoteles {
 		log.info ("Procesando informacion obtenida....");
 		return bebedor;
 	}
+	
+	public String rfc11() {
+		return "";
+	}
 
 	public String rfc12() {
 		// TODO Auto-generated method stub
