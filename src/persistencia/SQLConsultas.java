@@ -138,4 +138,21 @@ public class SQLConsultas {
 		System.out.println("CARGARON");
 		return r;
 	}
+
+	public String rfc12(PersistenceManager pm) {
+		// TODO Auto-generated method stub
+		String sentencia = "";
+		Query q = pm.newQuery(SQL,sentencia);
+		List<Object> objects = q.executeList();
+		String r = "";
+		int i=1;
+		for(Object o: objects){
+			Object[] datos=(Object[])o;
+			//Dependiendo del atributo que se este seleccionando en el SELECT se hara el acceso al arreglo datos
+			r+=i+") EL cliente con id "+datos[0]+" consumio "+datos[1]+" servicios y ninguno era id 7. \n";
+			i++;
+		}
+		return r;
+		
+	}
 }
