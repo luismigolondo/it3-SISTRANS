@@ -279,10 +279,17 @@ public class CadenaHoteles {
 		log.info ("Procesando informacion obtenida....");
 		return bebedor;
 	}
-	
-	public String rfc11() {
-		return "";
-	}
+
+	public List<RFC11> rfc11() {
+		log.info("Generando consulta RFC11");
+		List<RFC11> lista = new LinkedList<RFC11>();
+		List<RFC11> l = persistencia.rfc11();
+		for (RFC11 r : l)
+		{
+			lista.add(r);
+		}
+		log.info("Generando " + lista.size() + " consumo de clientes");
+		return lista;	}
 
 	public String rfc12() {
 		// TODO Auto-generated method stub
