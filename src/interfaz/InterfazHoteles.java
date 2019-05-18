@@ -888,6 +888,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		boolean secure=false;
 		while(!secure){
 			secure=loginGG();
+			System.out.println("HOOO");
 		}
 		try{
 			String resultado="";
