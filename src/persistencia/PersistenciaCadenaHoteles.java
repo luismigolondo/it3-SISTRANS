@@ -21,6 +21,7 @@ import negocio.Gasto;
 import negocio.Habitacion;
 import negocio.PlanesDeConsumo;
 import negocio.RFC1;
+import negocio.RFC11;
 import negocio.RFC2;
 import negocio.RFC3;
 import negocio.RFC6;
@@ -834,9 +835,15 @@ public class PersistenciaCadenaHoteles {
 		return sqlConsultas.rfc10(pm, servicioSeleccionado,ascdesc,inic, fin);
 	}
 
+	public List<RFC11> rfc11() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-
-
-
+	public String rfc12() {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		return sqlConsultas.rfc12(pm);
+	}
 
 }

@@ -40,6 +40,8 @@ import negocio.Convencion;
 import negocio.Gasto;
 import negocio.Hotel;
 import negocio.RFC1;
+import negocio.RFC10;
+import negocio.RFC11;
 import negocio.RFC2;
 import negocio.RFC3;
 import negocio.RFC4;
@@ -99,6 +101,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 
 	private int recepcionista = 2;
 	private int contraRecepcionista=123;
+	private int contraGerenteGeneral=000;
 
 
 	/* ****************************************************************
@@ -235,8 +238,19 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	//------------------------------------
 
 	public boolean login(){
-		int contra = Integer.parseInt(JOptionPane.showInputDialog (this, "Ingrese la clave", "Operacion restringida", JOptionPane.QUESTION_MESSAGE));
-		if(contra==contraRecepcionista)
+		boolean secure=false;
+		while(!secure){
+			int contra = Integer.parseInt(JOptionPane.showInputDialog (this, "Ingrese la clave", "Operacion restringida", JOptionPane.QUESTION_MESSAGE));
+			if(contra==contraRecepcionista)
+				return true;
+			JOptionPane.showMessageDialog(this, "Clave incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		return false;
+	}
+	
+	public boolean loginGG(){
+		int contra = Integer.parseInt(JOptionPane.showInputDialog (this, "INGRESE LA CLAVE DE GERENTE GENERAL", "Operacion restringida", JOptionPane.QUESTION_MESSAGE));
+		if(contra==contraGerenteGeneral)
 			return true;
 		JOptionPane.showMessageDialog(this, "Clave incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
 		return false;
@@ -247,6 +261,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		if(login()==true){
 			try 
 			{
+				JOptionPane.showMessageDialog(this, "BIENVENIDO AL MICROSOFT WORLD", "GG", JOptionPane.QUESTION_MESSAGE);
 				long hotel =  Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "Ingrese ID del Hotel", JOptionPane.QUESTION_MESSAGE));
 				long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva a crear", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
 				long idCliente = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese la cedula de ciduadania del cliente", "Agregar nueva reserva habitacion", JOptionPane.QUESTION_MESSAGE));
@@ -290,6 +305,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		if(login()==true){
 			try 
 			{
+				JOptionPane.showMessageDialog (this, "BIENVENIDO AL MICROSOFT WORLD", "GG", JOptionPane.QUESTION_MESSAGE);
 				long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva de servicio a crear", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
 				long idCliente = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese la cedula de ciduadania del cliente", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
 				long tipoId = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el tipo de identificacion", "Agregar nueva reserva de Servicio", JOptionPane.QUESTION_MESSAGE));
@@ -328,6 +344,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		if(login()==true){
 			try
 			{
+				JOptionPane.showMessageDialog (this, "BIENVENIDO AL MICROSOFT WORLD", "GG", JOptionPane.QUESTION_MESSAGE);
 				long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva para activar el checkin", "Realizar checkin", JOptionPane.QUESTION_MESSAGE));
 				if(id!=0)
 				{
@@ -353,7 +370,8 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	public void RF10registrarConsumoServicio()
 	{
 		if(login()==true){
-			try {    		
+			try {    	
+				JOptionPane.showMessageDialog (this, "BIENVENIDO AL MICROSOFT WORLD", "GG", JOptionPane.QUESTION_MESSAGE);
 				long idHabitacion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el id de la habitacion", "Ingresar Gasto", JOptionPane.QUESTION_MESSAGE));
 				long idProducto = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el id del producto para cobrar", "Ingresar Gasto", JOptionPane.QUESTION_MESSAGE));
 				String pFecha= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA", "Ingresar Gasto", JOptionPane.QUESTION_MESSAGE);
@@ -383,6 +401,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	{
 		if(login()==true){
 			try {
+				JOptionPane.showMessageDialog (this, "BIENVENIDO AL MICROSOFT WORLD", "GG", JOptionPane.QUESTION_MESSAGE);
 				long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la reserva para checkout", "Realizar checkout", JOptionPane.QUESTION_MESSAGE));
 				if(id!=0)
 				{
@@ -413,6 +432,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		if(login()==true){
 			try 
 			{
+				JOptionPane.showMessageDialog (this, "BIENVENIDO AL MICROSOFT WORLD", "GG", JOptionPane.QUESTION_MESSAGE);
 				long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
 				long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
 
@@ -461,6 +481,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		if(login()==true){
 			try 
 			{
+				JOptionPane.showMessageDialog(this, "BIENVENIDO AL MICROSOFT WORLD", "GG", JOptionPane.QUESTION_MESSAGE);
 				long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
 
 				String habs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de las habitaciones a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
@@ -486,6 +507,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		if(login()==true){
 
 			try{
+				JOptionPane.showMessageDialog (this, "BIENVENIDO AL MICROSOFT WORLD", "GG", JOptionPane.QUESTION_MESSAGE);
 				String resultado="";
 				long idConvencion = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador de la convencion", "", JOptionPane.QUESTION_MESSAGE));
 				resultado+="En finalizar convencion \n";
@@ -564,6 +586,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		if(login()==true){
 			try 
 			{
+				JOptionPane.showMessageDialog (this, "BIENVENIDO AL MICROSOFT WORLD", "GG", JOptionPane.QUESTION_MESSAGE);
 				long id = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador", "", JOptionPane.QUESTION_MESSAGE));
 
 				long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
@@ -591,10 +614,16 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		}
 	}
 
+
 	public void RF16registrarFinMantenimiento(){
-		if(login()==true){
+		boolean secure=false;
+		while(!secure){
+			secure=login();
+		}
+		if(secure==true){
 			try 
 			{
+				JOptionPane.showMessageDialog (this, "BIENVENIDO AL MICROSOFT WORLD", "GG", JOptionPane.QUESTION_MESSAGE);
 				long idHotel = Long.parseLong(JOptionPane.showInputDialog (this, "Ingrese el identificador del hotel", "", JOptionPane.QUESTION_MESSAGE));
 
 				String habs = JOptionPane.showInputDialog (this, "Ingrese separado por comas los IDs de las habitaciones a desreservar", "", JOptionPane.QUESTION_MESSAGE); 
@@ -635,7 +664,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -656,7 +685,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -679,7 +708,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -707,7 +736,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -728,7 +757,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -749,7 +778,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 		}
 		catch (Exception e) {
 			String resultado = generarMensajeError(e);
@@ -784,14 +813,14 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 
 			List<RFC9> lista = hoteles.rfc9(servicioSeleccionado, ascdesc, inic, fin);
 
-			String resultado = "Requerimiento funcional de consulta 7: \n";
+			String resultado = "Requerimiento funcional de consulta 9: \n";
 			int j = 1;
 			for(RFC9 r : lista)
 			{
 				resultado += j++ + ". " + r.toString() + "\n";
 			}
 			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			resultado += "\n Operaciï¿½n terminada";
 
 		}
 		catch (Exception e) {
@@ -829,11 +858,39 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 		String b = hoteles.rfc10(servicioSeleccionado,ascdesc,inic,fin);
 
 		panelDatos.actualizarInterfaz(b);
-		respuesta += "\n Operación terminada";
+		respuesta += "\n Operaciï¿½n terminada";
 	}
 
 	public void rfc11(){
+		try
+		{
+			List<RFC11> lista = hoteles.rfc11();
 
+			String resultado = "Requerimiento funcional de consulta 10: \n";
+			resultado += "SEMANA - ID SERVICIO MAX - MAXIMO - ID SERVICIO MIN - MINIMO - ID HABITACION MAX - MAXIMO- ID HABITACION MIN - MINIMO";
+			int i = 1;
+			for(RFC11 r : lista)
+			{
+				resultado += i++ + ". " + r.toString() + "\n";
+			}
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operaciï¿½n terminada";
+		}
+		catch (Exception e) {
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void rfc12(){
+		boolean secure=false;
+		while(!secure){
+			secure=loginGG();
+		}
+		if(secure){
+		JOptionPane.showMessageDialog (this, "BIENVENIDO, GERENTE GENERAL", "GG", JOptionPane.QUESTION_MESSAGE);
+		String b = hoteles.rfc12();
+		}
 	}
 
 	/* ****************************************************************
