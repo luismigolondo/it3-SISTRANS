@@ -280,6 +280,14 @@ public class CadenaHoteles {
 		return bebedor;
 	}
 
+	public String rfc12() {
+		// TODO Auto-generated method stub
+		log.info ("Realizando consulta RFC12...: ");
+		String bebedor = persistencia.rfc12();
+		log.info ("Procesando informacion obtenida....");
+		return bebedor;
+	}
+
 }
 
 
