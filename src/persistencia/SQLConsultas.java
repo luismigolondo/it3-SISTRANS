@@ -152,7 +152,9 @@ public class SQLConsultas {
 	
 	public String rfc12(PersistenceManager pm) {
 		// TODO Auto-generated method stub
-		String sentencia = "";
+		String sentencia = "SELECT c.NOMBRE,c.ID, COUNT(r.ID) AS SERVICIOS_CONSUMIDOS FROM CLIENTES c, RESERVAS_HABITACIONES r, GASTOS g, PRODUCTOS p WHERE c.ID=r.ID_CLIENTE AND g.ID_RESERVA_HABITACION=r.ID AND g.ID_PRODUCTO=p.ID "
+				+ "AND ((r.CHECKED_IN=1 AND r.CHECKED_OUT=1) OR (p.VALOR>300000) OR "
+				+ " (p.ID_SERVICIO=8 OR p.ID_SERVICIO=11)) GROUP BY c.ID order by COUNT(r.ID) DESC";
 		Query q = pm.newQuery(SQL,sentencia);
 		List<Object> objects = q.executeList();
 		String r = "";
@@ -160,7 +162,7 @@ public class SQLConsultas {
 		for(Object o: objects){
 			Object[] datos=(Object[])o;
 			//Dependiendo del atributo que se este seleccionando en el SELECT se hara el acceso al arreglo datos
-			r+=i+") EL cliente con id "+datos[0]+" consumio "+datos[1]+" servicios y ninguno era id 7. \n";
+			r+=i+") " +datos[0]+" CON ID "+ datos[1]+"ES UN BUEN CLIENTE Y CONSUMIO "+ datos[2]+" VECES\n";
 			i++;
 		}
 		return r;

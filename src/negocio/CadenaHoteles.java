@@ -289,7 +289,8 @@ public class CadenaHoteles {
 			lista.add(r);
 		}
 		log.info("Generando " + lista.size() + " consumo de clientes");
-		return lista;	}
+		return lista;	
+		}
 
 	public String rfc12() {
 		// TODO Auto-generated method stub

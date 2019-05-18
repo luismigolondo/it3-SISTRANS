@@ -864,6 +864,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	public void rfc11(){
 		try
 		{
+			System.out.println("LLEGOOO");
 			List<RFC11> lista = hoteles.rfc11();
 
 			String resultado = "Requerimiento funcional de consulta 10: \n";
