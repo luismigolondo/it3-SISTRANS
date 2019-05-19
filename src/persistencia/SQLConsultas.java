@@ -12,6 +12,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import negocio.RFC1;
+import negocio.RFC11;
 import negocio.RFC2;
 import negocio.RFC3;
 import negocio.RFC4;
@@ -139,6 +140,60 @@ public class SQLConsultas {
 		return r;
 	}
 
+	public List<RFC11> rfc11(PersistenceManager pm) {
+		String sentencia = "SELECT p.SEMANA, p.ID_SERVICIO_MAX, p.MAXIMO, p.ID_SERVICIO_MIN, p.MINIMO, d.ID_HABITACION_MAX, d.MAXIMO AS MAX_HABITACION, d.ID_HABITACION_MIN, d.MINIMO AS MIN_HABITACION\n" + 
+				"FROM (SELECT w.SEMANA, w.SERVICIOS AS ID_SERVICIO_MAX, w.MAXIMO, j.SERVICIOS AS ID_SERVICIO_MIN, j.MINIMO\n" + 
+				"FROM (SELECT z.SEMANA, l.SERVICIOS, z.MAXIMO\n" + 
+				"FROM (SELECT SEMANA, MAX(CUENTA) MAXIMO\n" + 
+				"FROM (SELECT to_char(r.HORA_APERTURA,'WW') SEMANA, r.ID_SERVICIO SERVICIOS, COUNT(ID_SERVICIO) CUENTA\n" + 
+				"FROM RESERVAS_SERVICIOS r\n" + 
+				"GROUP BY to_char(r.HORA_APERTURA,'WW'), r.ID_SERVICIO\n" + 
+				"ORDER BY SEMANA ASC) tabla\n" + 
+				"GROUP BY SEMANA) z, (SELECT to_char(r.HORA_APERTURA,'WW') SEMANA, r.ID_SERVICIO SERVICIOS, COUNT(ID_SERVICIO) CUENTA\n" + 
+				"FROM RESERVAS_SERVICIOS r\n" + 
+				"GROUP BY to_char(r.HORA_APERTURA,'WW'), r.ID_SERVICIO\n" + 
+				"ORDER BY SEMANA ASC) l\n" + 
+				"WHERE z.MAXIMO = l.CUENTA) w, (SELECT z.SEMANA, l.SERVICIOS, z.MINIMO\n" + 
+				"FROM (SELECT SEMANA, MIN(CUENTA) MINIMO\n" + 
+				"FROM (SELECT to_char(r.HORA_APERTURA,'WW') SEMANA, r.ID_SERVICIO SERVICIOS, COUNT(ID_SERVICIO) CUENTA\n" + 
+				"FROM RESERVAS_SERVICIOS r\n" + 
+				"GROUP BY to_char(r.HORA_APERTURA,'WW'), r.ID_SERVICIO\n" + 
+				"ORDER BY SEMANA ASC) tabla\n" + 
+				"GROUP BY SEMANA) z, (SELECT to_char(r.HORA_APERTURA,'WW') SEMANA, r.ID_SERVICIO SERVICIOS, COUNT(ID_SERVICIO) CUENTA\n" + 
+				"FROM RESERVAS_SERVICIOS r\n" + 
+				"GROUP BY to_char(r.HORA_APERTURA,'WW'), r.ID_SERVICIO\n" + 
+				"ORDER BY SEMANA ASC) l\n" + 
+				"WHERE z.MINIMO = l.CUENTA) j\n" + 
+				"WHERE w.SEMANA = j.SEMANA) p, (SELECT x.SEMANA, x.HABITACIONES AS ID_HABITACION_MAX, x.MAXIMO, n.HABITACIONES AS ID_HABITACION_MIN, n.MINIMO\n" + 
+				"FROM (SELECT v.SEMANA, m.HABITACIONES, v.MAXIMO\n" + 
+				"FROM (SELECT SEMANA, MAX(CUENTA) MAXIMO\n" + 
+				"FROM (SELECT to_char(c.FECHA_INICIO,'WW') SEMANA, c.ID_HABITACION HABITACIONES, COUNT(ID_HABITACION) CUENTA\n" + 
+				"FROM RESERVAS_HABITACIONES c\n" + 
+				"GROUP BY to_char(c.FECHA_INICIO,'WW'), c.ID_HABITACION\n" + 
+				"ORDER BY SEMANA ASC) a\n" + 
+				"GROUP BY SEMANA) v, (SELECT to_char(c.FECHA_INICIO,'WW') SEMANA, c.ID_HABITACION HABITACIONES, COUNT(ID_HABITACION) CUENTA\n" + 
+				"FROM RESERVAS_HABITACIONES c\n" + 
+				"GROUP BY to_char(c.FECHA_INICIO,'WW'), c.ID_HABITACION\n" + 
+				"ORDER BY SEMANA ASC) m\n" + 
+				"WHERE v.MAXIMO = m.CUENTA) x, (SELECT v.SEMANA, m.HABITACIONES, v.MINIMO\n" + 
+				"FROM (SELECT SEMANA, MIN(CUENTA) MINIMO\n" + 
+				"FROM (SELECT to_char(c.FECHA_INICIO,'WW') SEMANA, c.ID_HABITACION HABITACIONES, COUNT(ID_HABITACION) CUENTA\n" + 
+				"FROM RESERVAS_HABITACIONES c\n" + 
+				"GROUP BY to_char(c.FECHA_INICIO,'WW'), c.ID_HABITACION\n" + 
+				"ORDER BY SEMANA ASC) a\n" + 
+				"GROUP BY SEMANA) v, (SELECT to_char(c.FECHA_INICIO,'WW') SEMANA, c.ID_HABITACION HABITACIONES, COUNT(ID_HABITACION) CUENTA\n" + 
+				"FROM RESERVAS_HABITACIONES c\n" + 
+				"GROUP BY to_char(c.FECHA_INICIO,'WW'), c.ID_HABITACION\n" + 
+				"ORDER BY SEMANA ASC) m\n" + 
+				"WHERE v.MINIMO = m.CUENTA) n\n" + 
+				"WHERE x.SEMANA = n.SEMANA) d\n" + 
+				"WHERE p.SEMANA = d.SEMANA";
+		Query q = pm.newQuery(SQL,sentencia);
+		q.setResultClass(RFC11.class);
+		List<RFC11> l = (List<RFC11>) q.executeList();
+		return l;
+	}
+	
 	public String rfc12(PersistenceManager pm) {
 		// TODO Auto-generated method stub
 		String sentencia = "";
@@ -155,4 +210,5 @@ public class SQLConsultas {
 		return r;
 		
 	}
+
 }
