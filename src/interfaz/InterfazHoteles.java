@@ -41,6 +41,7 @@ import negocio.Gasto;
 import negocio.Hotel;
 import negocio.RFC1;
 import negocio.RFC10;
+import negocio.RFC11;
 import negocio.RFC2;
 import negocio.RFC3;
 import negocio.RFC4;
@@ -860,12 +861,12 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	public void rfc11(){
 		try
 		{
-			List<RFC10> lista = hoteles.rfc10();
+			List<RFC11> lista = hoteles.rfc11();
 
 			String resultado = "Requerimiento funcional de consulta 10: \n";
 			resultado += "SEMANA - ID SERVICIO MAX - MAXIMO - ID SERVICIO MIN - MINIMO - ID HABITACION MAX - MAXIMO- ID HABITACION MIN - MINIMO";
 			int i = 1;
-			for(RFC10 r : lista)
+			for(RFC11 r : lista)
 			{
 				resultado += i++ + ". " + r.toString() + "\n";
 			}
@@ -873,6 +874,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 			resultado += "\n Operaci�n terminada";
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}

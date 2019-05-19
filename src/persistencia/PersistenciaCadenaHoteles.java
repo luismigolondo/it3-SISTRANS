@@ -836,8 +836,8 @@ public class PersistenciaCadenaHoteles {
 	}
 
 	public List<RFC11> rfc11() {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		return sqlConsultas.rfc11(pm);
 	}
 
 	public String rfc12() {
