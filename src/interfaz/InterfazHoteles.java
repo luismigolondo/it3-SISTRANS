@@ -57,7 +57,7 @@ import negocio.VOReservaServicio;
 /**
  * Clase principal de la interfaz
  * @author Germ�n Bravo
- * MODIFICADO POR LUIS MIGUEL GOMEZ Y JUAN DAVID DIAZ PARA LA ITERACION 1 DE SISTEMAS TRANSACCIONALES.
+ * MODIFICADO POR LUIS MIGUEL GOMEZ Y JUAN DAVID DIAZ PARA LA ITERACION 3 DE SISTEMAS TRANSACCIONALES.
  */
 @SuppressWarnings("serial")
 public class InterfazHoteles extends JFrame implements ActionListener{
@@ -984,7 +984,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	 */
 	public void mostrarPresentacionGeneral ()
 	{
-		mostrarArchivo ("docs/It1-_C-07_jd.diazc_lm.londono.pdf");
+		mostrarArchivo ("docs/It3-_C-07_jd.diazc_lm.londono.pdf");
 	}
 
 	/**
@@ -992,7 +992,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	 */
 	public void mostrarModeloConceptual ()
 	{
-		mostrarArchivo ("docs/UML_Iteracion1.pdf");
+		mostrarArchivo ("docs/UML_Iteracion3.pdf");
 	}
 
 	/**
@@ -1000,7 +1000,7 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	 */
 	public void mostrarEsquemaBD ()
 	{
-		mostrarArchivo ("docs/esquemaBaseDatos Hoja1.pdf");
+		mostrarArchivo ("docs/esquemaBaseDatosIT3.pdf");
 	}
 
 	/**
