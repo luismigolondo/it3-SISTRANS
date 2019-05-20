@@ -48,9 +48,9 @@ public class SQLConsultas {
 
 	public List<RFC1> rfc1(PersistenceManager pm, String fechaInicio, String fechaFin)
 	{
-		Query q = pm.newQuery(SQL, "SELECT g.ID_HABITACION, SUM(p.VALOR) "
-				+ "FROM ((RESERVAS_HABITACIONES r INNER JOIN HABITACIONES h ON r.ID=h.ID AND r.FECHA_INICIO<= ? AND r.FECHA_FIN>= ? ) INNER JOIN GASTOS g on g.ID_HABITACION=h.ID) INNER JOIN PRODUCTOS p ON g.ID_PRODUCTO=p.ID "
-				+ "GROUP BY g.ID_HABITACION");
+		Query q = pm.newQuery(SQL, "SELECT g.ID_RESERVA_HABITACION AS HABITACION, SUM(p.VALOR) AS GASTO_TOTAL "
+				+ "FROM ((RESERVAS_HABITACIONES r INNER JOIN HABITACIONES h ON r.ID=h.ID AND r.FECHA_INICIO<= ? AND r.FECHA_FIN>= ? ) INNER JOIN GASTOS g on g.ID_RESERVA_HABITACION=h.ID) INNER JOIN PRODUCTOS p ON g.ID_PRODUCTO=p.ID "
+				+ "GROUP BY g.ID_RESERVA_HABITACION");
 		q.setResultClass(RFC1.class);
 		q.setParameters(fechaInicio, fechaFin);
 		return (List<RFC1>) q.executeList();
@@ -59,7 +59,7 @@ public class SQLConsultas {
 	public List<RFC2> rfc2(PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT g.ID_PRODUCTO, COUNT(*) "
-				+ "FROM (HABITACIONES h INNER JOIN GASTOS g ON h.id=g.ID_HABITACION) INNER JOIN PRODUCTOS p ON g.ID_PRODUCTO=p.ID "
+				+ "FROM (HABITACIONES h INNER JOIN GASTOS g ON h.id=g.ID_RESERVA_HABITACION) INNER JOIN PRODUCTOS p ON g.ID_PRODUCTO=p.ID "
 				+ "GROUP BY g.ID_PRODUCTO "
 				+ "FETCH FIRST 20 ROWS ONLY");
 		q.setResultClass(RFC2.class);

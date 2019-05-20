@@ -653,8 +653,8 @@ public class InterfazHoteles extends JFrame implements ActionListener{
 	{
 		try
 		{
-			String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA Ej: 18/03/2019", "Consultar ganancia habitaciones", JOptionPane.QUESTION_MESSAGE);
-			String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA Ej: 19/03/2019", "Consultar ganancia habitaciones", JOptionPane.QUESTION_MESSAGE);
+			String idFinic = JOptionPane.showInputDialog (this, "Ingrese la fecha de inicio DD/MM/AAAA Ej: 26/05/2019", "Consultar ganancia habitaciones", JOptionPane.QUESTION_MESSAGE);
+			String idFfin= JOptionPane.showInputDialog (this, "Ingrese la fecha de fin DD/MM/AAAA Ej: 27/05/2019", "Consultar ganancia habitaciones", JOptionPane.QUESTION_MESSAGE);
 			List<RFC1> lista = hoteles.rfc1(idFinic, idFfin);
 
 			String resultado = "Requerimiento funcional de consulta 1: \n";
