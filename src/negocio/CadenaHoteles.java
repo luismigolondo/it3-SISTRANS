@@ -272,10 +272,10 @@ public class CadenaHoteles {
 		return lista;
 	}
 
-	public String rfc10(int servicioSeleccionado, String ascdesc) {
+	public String rfc10(int servicioSeleccionado, String ascdesc,String inic, String fin) {
 		// TODO Auto-generated method stub
 		log.info ("Realizando consulta...: ");
-		String bebedor = persistencia.rfc10(servicioSeleccionado,ascdesc);
+		String bebedor = persistencia.rfc10(servicioSeleccionado,ascdesc,inic,fin);
 		log.info ("Procesando informacion obtenida....");
 		return bebedor;
 	}
@@ -289,7 +289,8 @@ public class CadenaHoteles {
 			lista.add(r);
 		}
 		log.info("Generando " + lista.size() + " consumo de clientes");
-		return lista;	}
+		return lista;	
+		}
 
 	public String rfc12() {
 		// TODO Auto-generated method stub
